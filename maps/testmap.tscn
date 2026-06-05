@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bmdywebyaq56k" path="res://scenes/ball.tscn" id="1_julm7"]
 [ext_resource type="PackedScene" uid="uid://bmlg7d06rvekb" path="res://scenes/player.tscn" id="2_ys0t5"]
 [ext_resource type="PackedScene" uid="uid://bs5lkulr3ejkl" path="res://scenes/clanker_spawner.tscn" id="3_8vdae"]
-[ext_resource type="PackedScene" uid="uid://bxmumy2kc48n2" path="res://scenes/goal.tscn" id="5_dbxb2"]
+[ext_resource type="PackedScene" uid="uid://ba33y32xlma6q" path="res://scenes/goalnew.tscn" id="5_7jtoi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ys0t5"]
 size = Vector3(50, 1, 30)
@@ -26,19 +26,6 @@ size = Vector3(50, 2.5, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8vdae"]
 size = Vector3(250, 1, 250)
-
-[sub_resource type="GDScript" id="GDScript_7jtoi"]
-script/source = "extends Node3D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-"
 
 [node name="Node3D" type="Node3D" unique_id=1450625905]
 script = ExtResource("1_6seei")
@@ -113,6 +100,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.1925025, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="oob detector" unique_id=742437213]
 shape = SubResource("BoxShape3D_8vdae")
 
-[node name="goal" parent="." unique_id=497915703 instance=ExtResource("5_dbxb2")]
+[node name="goal" parent="." unique_id=9225472 instance=ExtResource("5_7jtoi")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -18.5, 0, 0)
-script = SubResource("GDScript_7jtoi")
