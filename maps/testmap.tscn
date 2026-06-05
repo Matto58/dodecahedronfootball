@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://cj8ui21t2vl73"]
+
+[ext_resource type="Script" uid="uid://c15203hxuye1w" path="res://scripts/map_logic.gd" id="1_6seei"]
+[ext_resource type="PackedScene" uid="uid://bmdywebyaq56k" path="res://scenes/ball.tscn" id="1_julm7"]
+[ext_resource type="PackedScene" uid="uid://bmlg7d06rvekb" path="res://scenes/player.tscn" id="2_ys0t5"]
+[ext_resource type="PackedScene" uid="uid://bs5lkulr3ejkl" path="res://scenes/clanker_spawner.tscn" id="3_8vdae"]
+[ext_resource type="PackedScene" uid="uid://bxmumy2kc48n2" path="res://scenes/goal.tscn" id="5_dbxb2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ys0t5"]
+size = Vector3(50, 1, 30)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8vdae"]
+size = Vector3(50, 1, 30)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6seei"]
+size = Vector3(1, 7.5, 30)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dbxb2"]
+size = Vector3(1, 2.5, 30)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ov2oi"]
+size = Vector3(50, 7.5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x6wp4"]
+size = Vector3(50, 2.5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8vdae"]
+size = Vector3(250, 1, 250)
+
+[sub_resource type="GDScript" id="GDScript_7jtoi"]
+script/source = "extends Node3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[node name="Node3D" type="Node3D" unique_id=1450625905]
+script = ExtResource("1_6seei")
+title = "Testing Map"
+author = "ilo Kiso"
+playersPerTeam = 5
+metadata/_custom_type_script = "uid://b5se86qylwv8l"
+
+[node name="ball" parent="." unique_id=95649449 instance=ExtResource("1_julm7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2555461, 0)
+mass = 0.2
+
+[node name="ball reset point" type="Node3D" parent="." unique_id=60646456]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="player" parent="." unique_id=1311159354 instance=ExtResource("2_ys0t5")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 8, 2.5, 0)
+
+[node name="clanker spawner" parent="." unique_id=1932460306 instance=ExtResource("3_8vdae")]
+
+[node name="floor" type="StaticBody3D" parent="." unique_id=914429687]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor" unique_id=622055779]
+shape = SubResource("BoxShape3D_ys0t5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="floor" unique_id=639881212]
+mesh = SubResource("BoxMesh_8vdae")
+
+[node name="30mwall" type="StaticBody3D" parent="." unique_id=390586525]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5, 1.75, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="30mwall" unique_id=421409620]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+shape = SubResource("BoxShape3D_6seei")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="30mwall" unique_id=1624222855]
+mesh = SubResource("BoxMesh_dbxb2")
+
+[node name="30mwall2" type="StaticBody3D" parent="." unique_id=141081860]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 1.75, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="30mwall2" unique_id=63880777]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+shape = SubResource("BoxShape3D_6seei")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="30mwall2" unique_id=1522498949]
+mesh = SubResource("BoxMesh_dbxb2")
+
+[node name="50mwall" type="StaticBody3D" parent="." unique_id=592034109]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, -15.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="50mwall" unique_id=262768586]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+shape = SubResource("BoxShape3D_ov2oi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="50mwall" unique_id=88015916]
+mesh = SubResource("BoxMesh_x6wp4")
+
+[node name="50mwall2" type="StaticBody3D" parent="." unique_id=494809304]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 15.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="50mwall2" unique_id=121890118]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+shape = SubResource("BoxShape3D_ov2oi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="50mwall2" unique_id=1619570201]
+mesh = SubResource("BoxMesh_x6wp4")
+
+[node name="oob detector" type="Area3D" parent="." unique_id=1171823272]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.1925025, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="oob detector" unique_id=742437213]
+shape = SubResource("BoxShape3D_8vdae")
+
+[node name="goal" parent="." unique_id=497915703 instance=ExtResource("5_dbxb2")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -18.5, 0, 0)
+script = SubResource("GDScript_7jtoi")

@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://d3qicmrabgrbm"]
+
+[resource]
+cull_mode = 2
+albedo_color = Color(0.5333331, 0.3, 1, 1)
+grow = true
+distance_fade_mode = 2
+stencil_flags = 2

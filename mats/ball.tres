@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c48tgyw72734l"]
+
+[resource]
+metallic = 1.0
+roughness = 0.25
+distance_fade_max_distance = 1.45
+stencil_flags = 2
+stencil_color = Color(0, 1, 0, 1)
+stencil_outline_thickness = 0.235

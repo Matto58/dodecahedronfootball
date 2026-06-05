@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bxmumy2kc48n2"]
+
+[ext_resource type="PackedScene" uid="uid://bqgbj5juonkg0" path="res://misc/goal.glb" id="1_6k3qi"]
+[ext_resource type="Material" uid="uid://d3qicmrabgrbm" path="res://mats/goalourple.tres" id="2_0qle8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6k3qi"]
+size = Vector3(6, 4.5, 3.75)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0qle8"]
+size = Vector3(24, 6, 9)
+
+[node name="goal" unique_id=497915703 instance=ExtResource("1_6k3qi")]
+
+[node name="Cube" parent="." index="0" unique_id=257723313]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -3.75, 0.75, 0)
+material_override = ExtResource("2_0qle8")
+
+[node name="ballenter" type="Area3D" parent="." index="1" unique_id=521922588]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 1.125)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ballenter" index="0" unique_id=1185538322]
+shape = SubResource("BoxShape3D_6k3qi")
+
+[node name="ballexit" type="Area3D" parent="." index="2" unique_id=892937832]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ballexit" index="0" unique_id=569826566]
+shape = SubResource("BoxShape3D_0qle8")

@@ -1,0 +1,205 @@
+[gd_scene format=3 uid="uid://brcel7uf8ip6s"]
+
+[ext_resource type="Script" uid="uid://gm1na5yeqcar" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+
+[sub_resource type="SystemFont" id="SystemFont_vue75"]
+font_names = PackedStringArray("Arial")
+font_italic = true
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_l6cm7"]
+line_spacing = 0.0
+font = SubResource("SystemFont_vue75")
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_wu84c"]
+font = SubResource("SystemFont_vue75")
+font_size = 32
+
+[sub_resource type="SystemFont" id="SystemFont_ekxnf"]
+font_names = PackedStringArray("Arial")
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_bqqt6"]
+font = SubResource("SystemFont_ekxnf")
+font_size = 20
+font_color = Color(0.8, 0.8, 0.8, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_l6cm7"]
+font_names = PackedStringArray("Arial")
+
+[sub_resource type="LabelSettings" id="LabelSettings_ekxnf"]
+font = SubResource("SystemFont_l6cm7")
+font_size = 24
+
+[sub_resource type="SystemFont" id="SystemFont_bqqt6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8ln24"]
+font = SubResource("SystemFont_bqqt6")
+font_size = 20
+
+[node name="main menu" type="Control" unique_id=384968760]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l6cm7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=507673320]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1161541370]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=1935947663]
+layout_mode = 2
+text = "dodecahedron football"
+label_settings = SubResource("LabelSettings_l6cm7")
+
+[node name="democounter" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=1598374602]
+unique_name_in_owner = true
+layout_mode = 2
+text = "demo x"
+label_settings = SubResource("LabelSettings_wu84c")
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=289123513]
+visible = false
+layout_mode = 2
+text = "it's football, but with a dodecahedron
+(footdodecahedron does not have the same ring to it)"
+label_settings = SubResource("LabelSettings_bqqt6")
+
+[node name="Container" type="HFlowContainer" parent="HBoxContainer/VBoxContainer" unique_id=290155902]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/Container" unique_id=1506004718]
+layout_mode = 2
+disabled = true
+text = "Play (WIP)"
+
+[node name="Button4" type="Button" parent="HBoxContainer/VBoxContainer/Container" unique_id=1932089327]
+layout_mode = 2
+text = "Sandbox"
+
+[node name="Button2" type="Button" parent="HBoxContainer/VBoxContainer/Container" unique_id=1241194629]
+layout_mode = 2
+text = "Settings (WIP)"
+
+[node name="Button3" type="Button" parent="HBoxContainer/VBoxContainer/Container" unique_id=770468164]
+layout_mode = 2
+text = "Exit"
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer" unique_id=314881342]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer" unique_id=657258046]
+layout_mode = 2
+
+[node name="mapselect" type="VBoxContainer" parent="HBoxContainer/PanelContainer" unique_id=1632860458]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/mapselect" unique_id=1201691480]
+layout_mode = 2
+text = "Select map"
+label_settings = SubResource("LabelSettings_ekxnf")
+
+[node name="maplist" type="ItemList" parent="HBoxContainer/PanelContainer/mapselect" unique_id=87310087]
+unique_name_in_owner = true
+layout_mode = 2
+max_text_lines = 2
+auto_width = true
+auto_height = true
+item_count = 3
+item_0/text = "Testing Map, by ilo Kiso"
+item_1/text = "Other Map, by ilo Kiso"
+item_2/text = "Grounds, by ilo Kiso"
+
+[node name="HFlowContainer" type="HFlowContainer" parent="HBoxContainer/PanelContainer/mapselect" unique_id=1644031984]
+layout_mode = 2
+
+[node name="playmapsandbox" type="Button" parent="HBoxContainer/PanelContainer/mapselect/HFlowContainer" unique_id=2045666522]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "Enter sandbox"
+
+[node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer" unique_id=819916223]
+layout_mode = 2
+
+[node name="settoing" type="VBoxContainer" parent="HBoxContainer/PanelContainer2" unique_id=2127245563]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer2/settoing" unique_id=1760054131]
+layout_mode = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_ekxnf")
+
+[node name="TabContainer" type="TabContainer" parent="HBoxContainer/PanelContainer2/settoing" unique_id=1671766262]
+custom_minimum_size = Vector2(1000, 500)
+layout_mode = 2
+current_tab = 1
+
+[node name="Controls" type="VBoxContainer" parent="HBoxContainer/PanelContainer2/settoing/TabContainer" unique_id=1526212631]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer2/settoing/TabContainer/Controls" unique_id=334009528]
+layout_mode = 2
+text = "NOTE: THESE DO NOT SAVE YET. THEY WILL ONLY APPLY TO YOUR CURRENT SESSION."
+
+[node name="HFlowContainer" type="HFlowContainer" parent="HBoxContainer/PanelContainer2/settoing/TabContainer/Controls" unique_id=389768385]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer2/settoing/TabContainer/Controls/HFlowContainer" unique_id=2075707731]
+layout_mode = 2
+text = "Rotation sensitivity"
+
+[node name="rotationsensitivity" type="HSlider" parent="HBoxContainer/PanelContainer2/settoing/TabContainer/Controls/HFlowContainer" unique_id=509085246]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.5
+max_value = 15.0
+step = 0.5
+value = 5.0
+tick_count = 14
+ticks_on_borders = true
+
+[node name="About" type="VBoxContainer" parent="HBoxContainer/PanelContainer2/settoing/TabContainer" unique_id=664091425]
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="versionlabel" type="Label" parent="HBoxContainer/PanelContainer2/settoing/TabContainer/About" unique_id=1519071962]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Dodecahedron Football - Demo X - Version 0.x.y (edited programatically)"
+label_settings = SubResource("LabelSettings_8ln24")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/PanelContainer2/settoing/TabContainer/About" unique_id=329252997]
+layout_mode = 2
+bbcode_enabled = true
+text = "Dodecahedron Football is a for-now singleplayer game that's played like football, but with a dodecahedron. It is being developed by ilo Kiso (@toastermatt on most platforms, primarily Discord and Tumblr).
+It is licensed under the LGPL-3.0 license. Its text should be included along with the game in a file called LICENSE.txt. If it isn't, you can locate its contents online [url href=\"https://raw.githubusercontent.com/spdx/license-list-data/e6ccb09/text/LGPL-3.0-or-later.txt\"]here[/url].
+All primitive shapes are in the public domain, but the models that aren't primitive shapes are:
+- Goal - modeled by me (it's a shitty model ik. it doesn't even render correctly if culling is enabled. this will hopefully be fixed in 0.1.1)"
+fit_content = true
+
+[node name="githuburl" type="RichTextLabel" parent="HBoxContainer/PanelContainer2/settoing/TabContainer/About" unique_id=89216769]
+layout_mode = 2
+bbcode_enabled = true
+text = "[url]https://github.com/Matto58/dodecahedronfootball[/url] (nonexistent for now)"
+fit_content = true
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Container/Button4" to="." method="_on_button_4_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Container/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="item_activated" from="HBoxContainer/PanelContainer/mapselect/maplist" to="." method="_on_maplist_item_activated"]
+[connection signal="item_selected" from="HBoxContainer/PanelContainer/mapselect/maplist" to="." method="_on_maplist_item_selected"]
+[connection signal="pressed" from="HBoxContainer/PanelContainer/mapselect/HFlowContainer/playmapsandbox" to="." method="_on_playmapsandbox_pressed"]
+[connection signal="value_changed" from="HBoxContainer/PanelContainer2/settoing/TabContainer/Controls/HFlowContainer/rotationsensitivity" to="." method="_on_rotationsensitivity_value_changed"]
+[connection signal="meta_clicked" from="HBoxContainer/PanelContainer2/settoing/TabContainer/About/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]

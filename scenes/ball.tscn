@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bmdywebyaq56k"]
+
+[ext_resource type="Material" uid="uid://c48tgyw72734l" path="res://mats/ball.tres" id="1_41u45"]
+[ext_resource type="ArrayMesh" uid="uid://dgivhkpxlsvs2" path="res://misc/Dodecahedron.obj" id="1_x8fbi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x8fbi"]
+size = Vector3(0.75, 0.75, 0.75)
+
+[node name="ball" type="RigidBody3D" unique_id=95649449]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=603714489]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+material_override = ExtResource("1_41u45")
+mesh = ExtResource("1_x8fbi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1381313579]
+shape = SubResource("BoxShape3D_x8fbi")

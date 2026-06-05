@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://6glcw70ftxdt"]
+
+[ext_resource type="Animation" uid="uid://c8mfk61sdi6bb" path="res://anims/goal.tres" id="1_ahhtf"]
+
+[sub_resource type="SystemFont" id="SystemFont_onrkg"]
+font_names = PackedStringArray("Comic Sans MS")
+
+[sub_resource type="LabelSettings" id="LabelSettings_i3pqv"]
+font = SubResource("SystemFont_onrkg")
+font_size = 100
+
+[sub_resource type="Animation" id="Animation_ahhtf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("goallabel:label_settings")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("LabelSettings_i3pqv")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("goallabel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("goallabel:modulate:a8")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [255]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ahhtf"]
+_data = {
+&"RESET": SubResource("Animation_ahhtf"),
+&"goal": ExtResource("1_ahhtf")
+}
+
+[sub_resource type="SystemFont" id="SystemFont_ahhtf"]
+font_names = PackedStringArray("Arial")
+font_weight = 700
+
+[sub_resource type="LabelSettings" id="LabelSettings_oo0fn"]
+font = SubResource("SystemFont_ahhtf")
+font_size = 24
+
+[sub_resource type="SystemFont" id="SystemFont_5ysmq"]
+font_names = PackedStringArray("Arial")
+font_italic = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_6fi6k"]
+font = SubResource("SystemFont_5ysmq")
+
+[node name="HUD" type="Control" unique_id=1034299798]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=535505855]
+libraries/ = SubResource("AnimationLibrary_ahhtf")
+
+[node name="goallabel" type="Label" parent="." unique_id=1381697047]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 881.0
+offset_bottom = 678.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+text = "goal"
+label_settings = SubResource("LabelSettings_i3pqv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="mapprops" type="VBoxContainer" parent="." unique_id=798006506]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="name" type="Label" parent="mapprops" unique_id=597426808]
+layout_mode = 2
+text = "Map Name"
+label_settings = SubResource("LabelSettings_oo0fn")
+
+[node name="author" type="Label" parent="mapprops" unique_id=2135088056]
+layout_mode = 2
+text = "by Map Author"
+label_settings = SubResource("LabelSettings_6fi6k")
