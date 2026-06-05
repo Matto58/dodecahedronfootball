@@ -109,3 +109,16 @@ label_settings = SubResource("LabelSettings_oo0fn")
 layout_mode = 2
 text = "by Map Author"
 label_settings = SubResource("LabelSettings_6fi6k")
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1164445023]
+layout_mode = 0
+offset_top = 1040.0
+offset_right = 250.0
+offset_bottom = 1080.0
+
+[node name="staminabar" type="ColorRect" parent="." unique_id=2060494886]
+layout_mode = 0
+offset_top = 1040.0
+offset_right = 250.0
+offset_bottom = 1080.0
+color = Color(0, 1, 0, 1)

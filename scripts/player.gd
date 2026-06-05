@@ -8,6 +8,8 @@ const STAMINA_LENGTH = 2
 var stamina: float = 1.0
 var sprintStarted: float
 
+func _process(delta: float) -> void:
+	$Camera3D/HUD/staminabar.size.x = $Camera3D/HUD/ColorRect2.size.x * stamina
 
 func _physics_process(delta: float) -> void:
 	var sprinting: bool = Input.is_action_pressed("sprint")
