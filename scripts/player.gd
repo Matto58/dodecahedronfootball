@@ -1,5 +1,10 @@
 extends CharacterBody3D
 
+class_name Player
+
+@export_group("These are set programatically")
+@export var camera: Camera3D
+@export var hud: PlayerHUD
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4
@@ -7,6 +12,10 @@ const STAMINA_LENGTH = 2
 
 var stamina: float = 1.0
 var sprintStarted: float
+
+func _ready() -> void:
+	camera = $Camera3D
+	hud = $Camera3D/HUD
 
 func _process(delta: float) -> void:
 	$Camera3D/HUD/staminabar.size.x = $Camera3D/HUD/ColorRect2.size.x * stamina
