@@ -10,18 +10,19 @@ func changeToBuiltin(mapName: String):
 	get_tree().change_scene_to_packed(map)
 
 func _ready() -> void:
-	$HBoxContainer/PanelContainer/mapselect.hide()
-	$HBoxContainer/PanelContainer2/settoing.hide()
+	$HBoxContainer/PanelContainer.hide()
+	$HBoxContainer/PanelContainer2.hide()
+	get_window().title = "Dodecahedron Football Demo " + str(Settoing.GAME_DEMO_NUM) + " [v" + Settoing.GAME_VER + "]"
 	%versionlabel.text = "Dodecahedron Football - Version " + Settoing.GAME_VER + " - Demo " + str(Settoing.GAME_DEMO_NUM)
 	%democounter.text = "demo " + str(Settoing.GAME_DEMO_NUM)
 
 func _on_button_4_pressed() -> void:
-	$HBoxContainer/PanelContainer/mapselect.show()
-	$HBoxContainer/PanelContainer2/settoing.hide()
+	$HBoxContainer/PanelContainer.show()
+	$HBoxContainer/PanelContainer2.hide()
 
 func _on_button_2_pressed() -> void:
-	$HBoxContainer/PanelContainer/mapselect.hide()
-	$HBoxContainer/PanelContainer2/settoing.show()
+	$HBoxContainer/PanelContainer.hide()
+	$HBoxContainer/PanelContainer2.show()
 
 func _on_playmapsandbox_pressed() -> void:
 	_on_maplist_item_activated(%maplist.get_selected_items()[0])
