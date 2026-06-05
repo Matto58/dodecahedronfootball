@@ -3,7 +3,7 @@ extends Control
 const MAP_IDS = ["testmap", null, null]
 
 func changeToBuiltin(mapName: String):
-	var map = MapLoader.loadBuiltinMap("testmap")
+	var map = MapLoader.loadBuiltinMap(mapName)
 	if map == null:
 		$HBoxContainer/VBoxContainer/Container/Button4.text = "Failed :("
 		return
