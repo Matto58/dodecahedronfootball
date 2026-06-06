@@ -38,7 +38,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED * sprintMod)
 		velocity.z = move_toward(velocity.z, 0, SPEED * sprintMod)
-	rotate_y(-Input.get_axis("left", "right") * Settoing.rotMod)
+	rotate_y(-Input.get_axis("left", "right") * Settoing.activeInstance.rotMod)
 
 	move_and_slide()
 

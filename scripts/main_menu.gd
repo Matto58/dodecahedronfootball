@@ -10,6 +10,11 @@ func changeToBuiltin(mapName: String):
 	get_tree().change_scene_to_packed(map)
 
 func _ready() -> void:
+	Settoing.activeInstance = Settoing.loadFromFile()
+	if Settoing.activeInstance == null: Settoing.activeInstance = Settoing.new()
+
+	%rotsensitivity.value = Settoing.activeInstance.rotMod * 100
+
 	$HBoxContainer/PanelContainer.hide()
 	$HBoxContainer/PanelContainer2.hide()
 	get_window().title = "Dodecahedron Football Demo " + str(Settoing.GAME_DEMO_NUM) + " [v" + Settoing.GAME_VER + "]"
@@ -33,10 +38,13 @@ func _on_maplist_item_selected(index: int) -> void:
 func _on_maplist_item_activated(index: int) -> void:
 	changeToBuiltin(MAP_IDS[index])
 
-
 func _on_rotationsensitivity_value_changed(value: float) -> void:
-	Settoing.rotMod = value / 100
+	Settoing.activeInstance.rotMod = value / 100
+	%rotsensitivitylabel.text = str(value)
 
 func _on_rich_text_label_meta_clicked(meta: Variant) -> void:
 	print("OPENING url " + str(meta))
 	OS.shell_open(str(meta))
+
+func _on_savesettingsbtn_pressed() -> void:
+	Settoing.saveToFile(Settoing.activeInstance)
