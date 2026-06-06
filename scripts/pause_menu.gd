@@ -1,0 +1,11 @@
+extends PanelContainer
+
+func _on_button_pressed() -> void:
+	hide()
+
+func _on_button_2_pressed() -> void:
+	$HBoxContainer/settoing.visible = not $HBoxContainer/settoing.visible
+
+func _on_button_4_pressed() -> void:
+	# todo: add "are you sure" message
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

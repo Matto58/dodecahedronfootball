@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ctvrdn4fpbrqv" path="res://scripts/player.gd" id="1_4flbx"]
 [ext_resource type="Material" uid="uid://deq4jfd6yctbe" path="res://misc/skybox.tres" id="2_onrkg"]
 [ext_resource type="PackedScene" uid="uid://6glcw70ftxdt" path="res://scenes/hud.tscn" id="3_qhqgy"]
+[ext_resource type="PackedScene" uid="uid://du5ra3k5noqb7" path="res://scenes/pause_menu.tscn" id="4_dqkch"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 
@@ -32,3 +33,6 @@ current = true
 fov = 105.0
 
 [node name="HUD" parent="Camera3D" unique_id=1034299798 instance=ExtResource("3_qhqgy")]
+
+[node name="pause_menu" parent="Camera3D" unique_id=1287367898 instance=ExtResource("4_dqkch")]
+visible = false

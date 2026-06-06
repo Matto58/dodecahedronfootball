@@ -19,6 +19,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	$Camera3D/HUD/staminabar.size.x = $Camera3D/HUD/ColorRect2.size.x * stamina
+	if Input.is_action_just_pressed("pause"):
+		$Camera3D/pause_menu.visible = not $Camera3D/pause_menu.visible
 
 func _physics_process(delta: float) -> void:
 	var sprinting: bool = Input.is_action_pressed("sprint")
@@ -26,19 +28,20 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	if Input.is_action_just_pressed("yump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
 	var distance: Vector3 = global_position
 	var input_dir := Input.get_axis("forward", "backward")
 	var direction := (transform.basis * Vector3(0, 0, input_dir)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED * sprintMod
-		velocity.z = direction.z * SPEED * sprintMod
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED * sprintMod)
-		velocity.z = move_toward(velocity.z, 0, SPEED * sprintMod)
-	rotate_y(-Input.get_axis("left", "right") * Settoing.activeInstance.rotMod)
+	if not $Camera3D/pause_menu.visible:
+		if Input.is_action_just_pressed("yump") and is_on_floor():
+			velocity.y = JUMP_VELOCITY
+
+		if direction:
+			velocity.x = direction.x * SPEED * sprintMod
+			velocity.z = direction.z * SPEED * sprintMod
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED * sprintMod)
+			velocity.z = move_toward(velocity.z, 0, SPEED * sprintMod)
+		rotate_y(-Input.get_axis("left", "right") * Settoing.activeInstance.rotMod)
 
 	move_and_slide()
 

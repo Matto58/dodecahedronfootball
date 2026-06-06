@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://brcel7uf8ip6s"]
 
 [ext_resource type="Script" uid="uid://gm1na5yeqcar" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="PackedScene" uid="uid://6r4odniqxedc" path="res://scenes/settings_menu.tscn" id="2_ekxnf"]
 
 [sub_resource type="SystemFont" id="SystemFont_vue75"]
 font_names = PackedStringArray("Arial")
@@ -27,16 +28,12 @@ font_color = Color(0.8, 0.8, 0.8, 1)
 
 [sub_resource type="SystemFont" id="SystemFont_l6cm7"]
 font_names = PackedStringArray("Arial")
+font_italic = true
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_ekxnf"]
 font = SubResource("SystemFont_l6cm7")
-font_size = 24
-
-[sub_resource type="SystemFont" id="SystemFont_bqqt6"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_8ln24"]
-font = SubResource("SystemFont_bqqt6")
-font_size = 20
+font_size = 30
 
 [node name="main menu" type="Control" unique_id=384968760]
 layout_mode = 3
@@ -97,7 +94,6 @@ text = "Exit"
 layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="HBoxContainer" unique_id=657258046]
-visible = false
 layout_mode = 2
 
 [node name="mapselect" type="VBoxContainer" parent="HBoxContainer/PanelContainer" unique_id=1632860458]
@@ -105,7 +101,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="HBoxContainer/PanelContainer/mapselect" unique_id=1201691480]
 layout_mode = 2
-text = "Select map"
+text = "select map"
 label_settings = SubResource("LabelSettings_ekxnf")
 
 [node name="maplist" type="ItemList" parent="HBoxContainer/PanelContainer/mapselect" unique_id=87310087]
@@ -131,75 +127,8 @@ text = "Enter sandbox"
 [node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer" unique_id=819916223]
 layout_mode = 2
 
-[node name="settoing" type="VBoxContainer" parent="HBoxContainer/PanelContainer2" unique_id=2127245563]
-custom_minimum_size = Vector2(500, 0)
+[node name="settoing" parent="HBoxContainer/PanelContainer2" unique_id=899003022 instance=ExtResource("2_ekxnf")]
 layout_mode = 2
-
-[node name="Label" type="Label" parent="HBoxContainer/PanelContainer2/settoing" unique_id=1760054131]
-layout_mode = 2
-text = "Settings"
-label_settings = SubResource("LabelSettings_ekxnf")
-
-[node name="TabContainer" type="TabContainer" parent="HBoxContainer/PanelContainer2/settoing" unique_id=1671766262]
-layout_mode = 2
-current_tab = 0
-
-[node name="Controls" type="VBoxContainer" parent="HBoxContainer/PanelContainer2/settoing/TabContainer" unique_id=1526212631]
-layout_mode = 2
-metadata/_tab_index = 0
-
-[node name="Label" type="Label" parent="HBoxContainer/PanelContainer2/settoing/TabContainer/Controls" unique_id=334009528]
-visible = false
-layout_mode = 2
-text = "NOTE: THESE DO NOT SAVE YET. THEY WILL ONLY APPLY TO YOUR CURRENT SESSION."
-
-[node name="HFlowContainer" type="HFlowContainer" parent="HBoxContainer/PanelContainer2/settoing/TabContainer/Controls" unique_id=389768385]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="HBoxContainer/PanelContainer2/settoing/TabContainer/Controls/HFlowContainer" unique_id=2075707731]
-layout_mode = 2
-text = "Rotation sensitivity"
-
-[node name="rotsensitivity" type="HSlider" parent="HBoxContainer/PanelContainer2/settoing/TabContainer/Controls/HFlowContainer" unique_id=509085246]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-min_value = 0.5
-max_value = 15.0
-step = 0.5
-value = 5.0
-
-[node name="rotsensitivitylabel" type="Label" parent="HBoxContainer/PanelContainer2/settoing/TabContainer/Controls/HFlowContainer" unique_id=932430375]
-unique_name_in_owner = true
-layout_mode = 2
-text = "69.42"
-
-[node name="savesettingsbtn" type="Button" parent="HBoxContainer/PanelContainer2/settoing/TabContainer/Controls" unique_id=1419585896]
-layout_mode = 2
-text = "Save"
-
-[node name="About" type="VBoxContainer" parent="HBoxContainer/PanelContainer2/settoing/TabContainer" unique_id=664091425]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 1
-
-[node name="versionlabel" type="Label" parent="HBoxContainer/PanelContainer2/settoing/TabContainer/About" unique_id=1519071962]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Dodecahedron Football - Demo X - Version 0.x.y (edited programatically)"
-label_settings = SubResource("LabelSettings_8ln24")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/PanelContainer2/settoing/TabContainer/About" unique_id=329252997]
-layout_mode = 2
-bbcode_enabled = true
-text = "Dodecahedron Football is a for-now singleplayer game that's played like football, but with a dodecahedron. It is being developed by ilo Kiso (@toastermatt on most platforms, primarily Discord and Tumblr).
-It is licensed under the LGPL-3.0 license. Its text should be included along with the game in a file called LICENSE.txt. If it isn't, you can locate its contents online [url href=\"https://raw.githubusercontent.com/spdx/license-list-data/e6ccb09/text/LGPL-3.0-or-later.txt\"]here[/url].
-All primitive shapes are in the public domain, but the models that aren't primitive shapes are:
-- Goal - modeled by me
-
-[url]https://github.com/Matto58/dodecahedronfootball[/url]"
-fit_content = true
 
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Container/Button4" to="." method="_on_button_4_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Container/Button2" to="." method="_on_button_2_pressed"]
@@ -207,6 +136,3 @@ fit_content = true
 [connection signal="item_activated" from="HBoxContainer/PanelContainer/mapselect/maplist" to="." method="_on_maplist_item_activated"]
 [connection signal="item_selected" from="HBoxContainer/PanelContainer/mapselect/maplist" to="." method="_on_maplist_item_selected"]
 [connection signal="pressed" from="HBoxContainer/PanelContainer/mapselect/HFlowContainer/playmapsandbox" to="." method="_on_playmapsandbox_pressed"]
-[connection signal="value_changed" from="HBoxContainer/PanelContainer2/settoing/TabContainer/Controls/HFlowContainer/rotsensitivity" to="." method="_on_rotationsensitivity_value_changed"]
-[connection signal="pressed" from="HBoxContainer/PanelContainer2/settoing/TabContainer/Controls/savesettingsbtn" to="." method="_on_savesettingsbtn_pressed"]
-[connection signal="meta_clicked" from="HBoxContainer/PanelContainer2/settoing/TabContainer/About/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]
