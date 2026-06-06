@@ -48,3 +48,6 @@ func _on_rich_text_label_meta_clicked(meta: Variant) -> void:
 
 func _on_savesettingsbtn_pressed() -> void:
 	Settoing.saveToFile(Settoing.activeInstance)
+
+func _on_button_3_pressed() -> void:
+	get_tree().quit()

@@ -203,6 +203,7 @@ fit_content = true
 
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Container/Button4" to="." method="_on_button_4_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Container/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Container/Button3" to="." method="_on_button_3_pressed"]
 [connection signal="item_activated" from="HBoxContainer/PanelContainer/mapselect/maplist" to="." method="_on_maplist_item_activated"]
 [connection signal="item_selected" from="HBoxContainer/PanelContainer/mapselect/maplist" to="." method="_on_maplist_item_selected"]
 [connection signal="pressed" from="HBoxContainer/PanelContainer/mapselect/HFlowContainer/playmapsandbox" to="." method="_on_playmapsandbox_pressed"]
