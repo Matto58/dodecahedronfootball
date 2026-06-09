@@ -11,6 +11,10 @@ subpixel_positioning = 0
 font = SubResource("SystemFont_l6cm7")
 font_size = 30
 
+[sub_resource type="LabelSettings" id="LabelSettings_05p07"]
+font_size = 20
+font_color = Color(0.75, 0.75, 0.75, 1)
+
 [sub_resource type="SystemFont" id="SystemFont_bqqt6"]
 subpixel_positioning = 0
 
@@ -36,9 +40,9 @@ layout_mode = 2
 metadata/_tab_index = 0
 
 [node name="Label" type="Label" parent="TabContainer/Controls" unique_id=1482236280]
-visible = false
 layout_mode = 2
-text = "NOTE: THESE DO NOT SAVE YET. THEY WILL ONLY APPLY TO YOUR CURRENT SESSION."
+text = "General"
+label_settings = SubResource("LabelSettings_05p07")
 
 [node name="HFlowContainer" type="HFlowContainer" parent="TabContainer/Controls" unique_id=960417979]
 layout_mode = 2
@@ -61,6 +65,21 @@ value = 5.0
 unique_name_in_owner = true
 layout_mode = 2
 text = "69.42"
+
+[node name="Label2" type="Label" parent="TabContainer/Controls" unique_id=2129500822]
+layout_mode = 2
+text = "Controller specific"
+label_settings = SubResource("LabelSettings_05p07")
+
+[node name="rightstickforpan" type="CheckButton" parent="TabContainer/Controls" unique_id=198874147]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Use right stick for camera pan"
+
+[node name="Label3" type="Label" parent="TabContainer/Controls" unique_id=442332593]
+layout_mode = 2
+text = "Keyboard specific (none for now)"
+label_settings = SubResource("LabelSettings_05p07")
 
 [node name="savesettingsbtn" type="Button" parent="TabContainer/Controls" unique_id=184736798]
 layout_mode = 2
@@ -89,5 +108,7 @@ All primitive shapes are in the public domain, but the models that aren't primit
 fit_content = true
 
 [connection signal="value_changed" from="TabContainer/Controls/HFlowContainer/rotsensitivity" to="." method="_on_rotationsensitivity_value_changed"]
+[connection signal="button_down" from="TabContainer/Controls/rightstickforpan" to="." method="_on_rightstickforpan_button_down"]
+[connection signal="toggled" from="TabContainer/Controls/rightstickforpan" to="." method="_on_rightstickforpan_toggled"]
 [connection signal="pressed" from="TabContainer/Controls/savesettingsbtn" to="." method="_on_savesettingsbtn_pressed"]
 [connection signal="meta_clicked" from="TabContainer/About/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]
