@@ -1,7 +1,7 @@
 Goals for Demo 2:
 - [x] Make settings actually save
 - [x] Make the exit button work :sob:
-- [ ] Make UI controllable on controller
+- [x] Make UI controllable on controller
 - [ ] A soundtrack (just ingame and main menu for now)
 - [x] Pause menu
 - [ ] Teams for players

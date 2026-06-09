@@ -14,6 +14,7 @@ func _ready() -> void:
 	$HBoxContainer/PanelContainer2.hide()
 	get_window().title = "Dodecahedron Football Demo " + str(Settoing.GAME_DEMO_NUM) + " [v" + Settoing.GAME_VER + "]"
 	%democounter.text = "demo " + str(Settoing.GAME_DEMO_NUM)
+	$HBoxContainer/VBoxContainer/Container/Button4.grab_focus()
 
 func _on_button_4_pressed() -> void:
 	$HBoxContainer/PanelContainer.show()
