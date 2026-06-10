@@ -7,13 +7,17 @@ func resetBall():
 	$ball.linear_velocity = Vector3.ZERO
 	$ball.global_position = $"ball reset point".global_position
 
+func onGoal(yello: bool):
+	if yello: scoreYellow += 1
+	else: scorePurple += 1
+	$player/Camera3D/HUD/goalLabel.label_settings.font_color = Color(1, 1, 0) if yello else Color(0.5, 0, 1)
+	$player/Camera3D/HUD/AnimationPlayer.play("goal")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	resetBall()
-	$goalpurple.onGoalScore.connect(func(yello):
-		if yello: scoreYellow += 1
-		else: scorePurple += 1
-	)
+	$goalpurple.onGoalScore.connect(onGoal)
+	$goalyellow.onGoalScore.connect(onGoal)
 	$player.nickname = Settoing.activeInstance.nickname
 	$player.isYellow = randf() >= 0.5
 	$player.initPlayerNickInHUD()

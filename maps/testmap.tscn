@@ -99,11 +99,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.1925025, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="oob detector" unique_id=742437213]
 shape = SubResource("BoxShape3D_8vdae")
 
-[node name="goalpurple" parent="." unique_id=9225472 node_paths=PackedStringArray("players") instance=ExtResource("5_7jtoi")]
+[node name="goalpurple" parent="." unique_id=9225472 instance=ExtResource("5_7jtoi")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -18.5, 0, 0)
-players = [NodePath("../player")]
 
-[node name="goalyellow" parent="." unique_id=146667370 node_paths=PackedStringArray("players") instance=ExtResource("5_7jtoi")]
+[node name="goalyellow" parent="." unique_id=146667370 instance=ExtResource("5_7jtoi")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18.5, 0, 0)
 isYellow = true
-players = [NodePath("../player")]
