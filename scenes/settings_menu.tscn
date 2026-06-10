@@ -81,14 +81,27 @@ layout_mode = 2
 text = "Keyboard specific (none for now)"
 label_settings = SubResource("LabelSettings_05p07")
 
-[node name="savesettingsbtn" type="Button" parent="TabContainer/Controls" unique_id=184736798]
+[node name="Player" type="VBoxContainer" parent="TabContainer" unique_id=2113281761]
+visible = false
 layout_mode = 2
-text = "Save"
+metadata/_tab_index = 1
+
+[node name="HFlowContainer" type="HFlowContainer" parent="TabContainer/Player" unique_id=1503792346]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Player/HFlowContainer" unique_id=432204407]
+layout_mode = 2
+text = "Nickname"
+
+[node name="nickname" type="LineEdit" parent="TabContainer/Player/HFlowContainer" unique_id=1705356399]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="About" type="VBoxContainer" parent="TabContainer" unique_id=1985007587]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 1
+metadata/_tab_index = 2
 
 [node name="versionlabel" type="Label" parent="TabContainer/About" unique_id=1395943504]
 unique_name_in_owner = true
@@ -107,8 +120,13 @@ All primitive shapes are in the public domain, but the models that aren't primit
 [url]https://github.com/Matto58/dodecahedronfootball[/url]"
 fit_content = true
 
+[node name="savesettingsbtn" type="Button" parent="." unique_id=184736798]
+layout_mode = 2
+text = "Save"
+
 [connection signal="value_changed" from="TabContainer/Controls/HFlowContainer/rotsensitivity" to="." method="_on_rotationsensitivity_value_changed"]
 [connection signal="button_down" from="TabContainer/Controls/rightstickforpan" to="." method="_on_rightstickforpan_button_down"]
 [connection signal="toggled" from="TabContainer/Controls/rightstickforpan" to="." method="_on_rightstickforpan_toggled"]
-[connection signal="pressed" from="TabContainer/Controls/savesettingsbtn" to="." method="_on_savesettingsbtn_pressed"]
+[connection signal="text_changed" from="TabContainer/Player/HFlowContainer/nickname" to="." method="_on_nickname_text_changed"]
 [connection signal="meta_clicked" from="TabContainer/About/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]
+[connection signal="pressed" from="savesettingsbtn" to="." method="_on_savesettingsbtn_pressed"]

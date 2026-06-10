@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://ctvrdn4fpbrqv" path="res://scripts/player.gd" id="1_4flbx"]
 [ext_resource type="Material" uid="uid://deq4jfd6yctbe" path="res://misc/skybox.tres" id="2_onrkg"]
+[ext_resource type="Material" uid="uid://d3qicmrabgrbm" path="res://mats/goalourple.tres" id="2_tuyoq"]
+[ext_resource type="Material" uid="uid://cg0kx4l5arnyb" path="res://mats/goalyello.tres" id="3_fjrip"]
 [ext_resource type="PackedScene" uid="uid://6glcw70ftxdt" path="res://scenes/hud.tscn" id="3_qhqgy"]
 [ext_resource type="PackedScene" uid="uid://du5ra3k5noqb7" path="res://scenes/pause_menu.tscn" id="4_dqkch"]
 
@@ -18,6 +20,8 @@ sky = SubResource("Sky_i3pqv")
 
 [node name="player" type="CharacterBody3D" unique_id=1748714981]
 script = ExtResource("1_4flbx")
+purpleMaterial = ExtResource("2_tuyoq")
+yellowMaterial = ExtResource("3_fjrip")
 metadata/_custom_type_script = "uid://ctvrdn4fpbrqv"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=455418228]

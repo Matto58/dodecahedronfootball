@@ -2,7 +2,7 @@ extends Control
 
 class_name PlayerHUD
 
-@export_group("These are set programatically")
+@export_group("Programatically set values")
 @export var animationPlayer: AnimationPlayer
 @export var goalLabel: Label
 

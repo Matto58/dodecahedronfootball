@@ -125,3 +125,13 @@ offset_top = 860.0
 offset_right = 250.0
 offset_bottom = 900.0
 color = Color(0, 1, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1317162160]
+layout_mode = 0
+offset_left = 1200.0
+offset_top = 4.0
+offset_right = 1600.0
+offset_bottom = 44.0
+bbcode_enabled = true
+fit_content = true
+horizontal_alignment = 2

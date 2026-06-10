@@ -7,6 +7,9 @@ func resetBall():
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	resetBall()
+	$player.nickname = Settoing.activeInstance.nickname
+	$player.isYellow = randf() >= 0.5
+	$player.initPlayerNickInHUD()
 	$player/Camera3D/HUD/mapprops/author.text = "by " + author
 	$player/Camera3D/HUD/mapprops/name.text = title
 	$"oob detector".body_entered.connect(func(body):

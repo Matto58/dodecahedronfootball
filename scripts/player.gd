@@ -2,7 +2,13 @@ extends CharacterBody3D
 
 class_name Player
 
-@export_group("These are set programatically")
+@export_group("Configurable values")
+@export var isYellow: bool = false
+@export var purpleMaterial: StandardMaterial3D
+@export var yellowMaterial: StandardMaterial3D
+@export var nickname: String
+
+@export_group("Programatically set values")
 @export var camera: Camera3D
 @export var hud: PlayerHUD
 
@@ -16,6 +22,10 @@ var sprintStarted: float
 func _ready() -> void:
 	camera = $Camera3D
 	hud = $Camera3D/HUD
+	$MeshInstance3D.mesh.surface_set_material(0, yellowMaterial if isYellow else purpleMaterial)
+
+func initPlayerNickInHUD():
+	$Camera3D/HUD/RichTextLabel.append_text("[color=\"#999\"]Playing as[/color] [b][color=\"#%s\"]%s[/color][/b]" % ["ff0" if isYellow else "7f00ff", nickname])
 
 func _process(delta: float) -> void:
 	$Camera3D/HUD/staminabar.size.x = $Camera3D/HUD/ColorRect2.size.x * stamina
