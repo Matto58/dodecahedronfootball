@@ -2,11 +2,11 @@ Goals for Demo 2:
 - [x] Make settings actually save
 - [x] Make the exit button work :sob:
 - [x] Make UI controllable on controller
-- [ ] A soundtrack (just ingame and main menu for now)
+- [ ] A soundtrack (just ingame and main menu for now) (0.2.3)
 - [x] Pause menu
-- [ ] Teams for players
-- [ ] Score counter
-- [ ] Game timer (10 minutes for matches, 180 minutes for sandbox)
+- [ ] Teams for players (0.2.2)
+- [ ] Score counter (0.2.2)
+- [ ] Game timer (10 minutes for matches, 180 minutes for sandbox) (0.2.2)
 
 Goals for Demo 3:
 - [ ] Make Grounds a real map
