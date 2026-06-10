@@ -9,6 +9,8 @@ var canScoreBall = true
 @export var yellowMaterial: StandardMaterial3D
 @export var players: Array[Player]
 
+var onGoalScore: Signal
+
 func _ready() -> void:
 	$MeshInstance3D.material_override = yellowMaterial if isYellow else purpleMaterial
 
@@ -21,6 +23,7 @@ func _ready() -> void:
 			p.hud.goalLabel.label_settings.font_color = Color(0.5, 0, 1) if isYellow else Color(1, 1, 0) 
 			p.hud.animationPlayer.play("goal")
 		canScoreBall = false
+		onGoalScore.emit(isYellow)
 	)
 	$ballexit.body_exited.connect(func(body):
 		if body.name != "ball": return

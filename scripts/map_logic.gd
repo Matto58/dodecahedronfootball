@@ -1,5 +1,8 @@
 extends Map
 
+var scorePurple: int = 0
+var scoreYellow: int = 0
+
 func resetBall():
 	$ball.linear_velocity = Vector3.ZERO
 	$ball.global_position = $"ball reset point".global_position
@@ -7,6 +10,10 @@ func resetBall():
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	resetBall()
+	$goalpurple.onGoalScore.connect(func(yello):
+		if yello: scoreYellow += 1
+		else: scorePurple += 1
+	)
 	$player.nickname = Settoing.activeInstance.nickname
 	$player.isYellow = randf() >= 0.5
 	$player.initPlayerNickInHUD()

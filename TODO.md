@@ -5,7 +5,7 @@ Goals for Demo 2:
 - [ ] A soundtrack (just ingame and main menu for now) (0.2.3)
 - [x] Pause menu
 - [x] Teams for players (0.2.2)
-- [ ] Score counter (0.2.2)
+- [x] Score counter (0.2.2)
 - [ ] Game timer (10 minutes for matches, 180 minutes for sandbox) (0.2.2)
 
 Goals for Demo 3:
