@@ -4,7 +4,7 @@ Goals for Demo 2:
 - [x] Make UI controllable on controller
 - [ ] A soundtrack (just ingame and main menu for now) (0.2.3)
 - [x] Pause menu
-- [ ] Teams for players (0.2.2)
+- [x] Teams for players (0.2.2)
 - [ ] Score counter (0.2.2)
 - [ ] Game timer (10 minutes for matches, 180 minutes for sandbox) (0.2.2)
 
