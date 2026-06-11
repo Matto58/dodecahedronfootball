@@ -6,7 +6,7 @@ Goals for Demo 2:
 - [x] Pause menu
 - [x] Teams for players (0.2.2)
 - [x] Score counter (0.2.2)
-- [ ] Game timer (10 minutes for matches, 180 minutes for sandbox) (0.2.2)
+- [x] Game timer (10 minutes for matches, 180 minutes for sandbox) (0.2.2)
 
 Goals for Demo 3:
 - [ ] Make Grounds a real map

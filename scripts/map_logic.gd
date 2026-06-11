@@ -11,11 +11,16 @@ func updateScores():
 	$player/Camera3D/HUD/RichTextLabel2.text = "[b][color=\"#7f00ff\"]%d[/color][/b] : [b][color=\"#ff0\"]%d[/color][/b]" % [scorePurple, scoreYellow]
 
 func onGoal(yello: bool):
-	if yello: scoreYellow += 1
-	else: scorePurple += 1
+	if yello: scorePurple += 1
+	else: scoreYellow += 1
 	$player/Camera3D/HUD/goallabel.label_settings.font_color = Color(1, 1, 0) if yello else Color(0.5, 0, 1)
 	$player/Camera3D/HUD/AnimationPlayer.play("goal")
 	updateScores()
+
+func timeToStr(seconds: float):
+	var minutes = int(seconds/60)
+	var secondsComponent = int(seconds - minutes*60)
+	return str(minutes) + ":" + str(secondsComponent).pad_zeros(2)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -35,6 +40,8 @@ func _ready() -> void:
 		#print("fuck")
 	)
 
+	roundTimer.start()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	$player/Camera3D/HUD/timerlabel.text = timeToStr(roundTimer.time_left)

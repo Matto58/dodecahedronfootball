@@ -27,10 +27,11 @@ size = Vector3(50, 2.5, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_8vdae"]
 size = Vector3(250, 1, 250)
 
-[node name="Node3D" type="Node3D" unique_id=1450625905]
+[node name="Node3D" type="Node3D" unique_id=1450625905 node_paths=PackedStringArray("roundTimer")]
 script = ExtResource("1_6seei")
 title = "Testing Map"
 author = "ilo Kiso"
+roundTimer = NodePath("Timer")
 metadata/_custom_type_script = "uid://b5se86qylwv8l"
 
 [node name="ball" parent="." unique_id=95649449 instance=ExtResource("1_julm7")]
@@ -105,3 +106,6 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -18.
 [node name="goalyellow" parent="." unique_id=146667370 instance=ExtResource("5_7jtoi")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18.5, 0, 0)
 isYellow = true
+
+[node name="Timer" type="Timer" parent="." unique_id=1400241490]
+wait_time = 10800.0
