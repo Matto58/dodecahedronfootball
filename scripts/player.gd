@@ -8,20 +8,18 @@ class_name Player
 @export var yellowMaterial: StandardMaterial3D
 @export var nickname: String
 
-@export_group("Programatically set values")
-@export var camera: Camera3D
-@export var hud: PlayerHUD
-
 const SPEED = 5.0
 const JUMP_VELOCITY = 4
 const STAMINA_LENGTH = 2
+
+# local copies
+var scorePurple: int = 0
+var scoreYellow: int = 0
 
 var stamina: float = 1.0
 var sprintStarted: float
 
 func _ready() -> void:
-	camera = $Camera3D
-	hud = $Camera3D/HUD
 	$MeshInstance3D.mesh.surface_set_material(0, yellowMaterial if isYellow else purpleMaterial)
 
 func initPlayerNickInHUD():

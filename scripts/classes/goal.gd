@@ -8,7 +8,7 @@ var canScoreBall = true
 @export var purpleMaterial: StandardMaterial3D
 @export var yellowMaterial: StandardMaterial3D
 
-var onGoalScore: Signal
+signal onGoalScore
 
 func _ready() -> void:
 	$MeshInstance3D.material_override = yellowMaterial if isYellow else purpleMaterial
