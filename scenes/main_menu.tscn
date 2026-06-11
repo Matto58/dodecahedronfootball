@@ -110,10 +110,9 @@ layout_mode = 2
 max_text_lines = 2
 auto_width = true
 auto_height = true
-item_count = 3
+item_count = 2
 item_0/text = "Testing Map, by ilo Kiso"
-item_1/text = "Other Map, by ilo Kiso"
-item_2/text = "Grounds, by ilo Kiso"
+item_1/text = "Grounds, by ilo Kiso"
 
 [node name="HFlowContainer" type="HFlowContainer" parent="HBoxContainer/PanelContainer/mapselect" unique_id=1644031984]
 layout_mode = 2
