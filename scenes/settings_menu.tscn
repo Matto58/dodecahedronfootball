@@ -140,8 +140,21 @@ value = 75.0
 layout_mode = 2
 text = "75%"
 
+[node name="Label" type="Label" parent="TabContainer/Audio" unique_id=866944867]
+layout_mode = 2
+text = "Default main menu track:"
+
+[node name="mainmenutrack" type="OptionButton" parent="TabContainer/Audio" unique_id=668249453]
+unique_name_in_owner = true
+layout_mode = 2
+selected = 0
+item_count = 1
+popup/item_0/text = "Random"
+popup/item_0/id = 0
+
 [node name="About" type="VBoxContainer" parent="TabContainer" unique_id=1985007587]
 visible = false
+custom_minimum_size = Vector2(900, 0)
 layout_mode = 2
 metadata/_tab_index = 3
 
@@ -151,13 +164,17 @@ layout_mode = 2
 text = "Dodecahedron Football - Demo X - Version 0.x.y (edited programatically)"
 label_settings = SubResource("LabelSettings_8ln24")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/About" unique_id=1584794843]
+[node name="abouttext" type="RichTextLabel" parent="TabContainer/About" unique_id=1584794843]
+unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
 text = "Dodecahedron Football is a for-now singleplayer game that's played like football, but with a dodecahedron. It is being developed by ilo Kiso (@toastermatt on Tumblr, @hantyumiwireplay on Discord).
-It is licensed under the LGPL-3.0 license. Its text should be included along with the game in a file called LICENSE.txt. If it isn't, you can locate its contents online [url href=\"https://raw.githubusercontent.com/spdx/license-list-data/e6ccb09/text/LGPL-3.0-or-later.txt\"]here[/url].
+It is licensed under the LGPL-3.0 license, except for its music, more on that below. Its text should be included along with the game in a file called LICENSE.txt. If it isn't, you can locate its contents online [url href=\"https://raw.githubusercontent.com/spdx/license-list-data/e6ccb09/text/LGPL-3.0-or-later.txt\"]here[/url].
 All primitive shapes are in the public domain, but the models that aren't primitive shapes are:
-- Goal - modeled by me
+- Goal - modeled by me - I hereby release it into the public domain
+
+As mentioned earlier, all the music is under a different license.
+Main menu tracks are under these licenses:%s
 
 [url]https://github.com/Matto58/dodecahedronfootball[/url]"
 fit_content = true
@@ -171,5 +188,6 @@ text = "Save"
 [connection signal="toggled" from="TabContainer/Controls/rightstickforpan" to="." method="_on_rightstickforpan_toggled"]
 [connection signal="text_changed" from="TabContainer/Player/HFlowContainer/nickname" to="." method="_on_nickname_text_changed"]
 [connection signal="value_changed" from="TabContainer/Audio/HFlowContainer/mastervol" to="." method="_on_mastervol_value_changed"]
-[connection signal="meta_clicked" from="TabContainer/About/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]
+[connection signal="item_selected" from="TabContainer/Audio/mainmenutrack" to="." method="_on_mainmenutrack_item_selected"]
+[connection signal="meta_clicked" from="TabContainer/About/abouttext" to="." method="_on_rich_text_label_meta_clicked"]
 [connection signal="pressed" from="savesettingsbtn" to="." method="_on_savesettingsbtn_pressed"]
