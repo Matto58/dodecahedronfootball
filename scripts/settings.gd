@@ -3,7 +3,7 @@ extends Resource
 class_name Settoing # <-- yes this is a phighting reference. yes it is an intentional typo
 
 # GAME INFO CONSTS
-const GAME_VER = "0.2.2"
+const GAME_VER = "0.2.3"
 const GAME_DEMO_NUM = 2
 
 # PLAYER
