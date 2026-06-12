@@ -55,7 +55,7 @@ text = "Rotation sensitivity"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 1
+size_flags_vertical = 4
 min_value = 0.5
 max_value = 15.0
 step = 0.5
@@ -98,10 +98,52 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="About" type="VBoxContainer" parent="TabContainer" unique_id=1985007587]
+[node name="Audio" type="VBoxContainer" parent="TabContainer" unique_id=1781061325]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
+
+[node name="HFlowContainer" type="HFlowContainer" parent="TabContainer/Audio" unique_id=1647336784]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Audio/HFlowContainer" unique_id=92074868]
+layout_mode = 2
+text = "Master volume"
+
+[node name="mastervol" type="HSlider" parent="TabContainer/Audio/HFlowContainer" unique_id=1695990836]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 50.0
+
+[node name="mastervollabel" type="Label" parent="TabContainer/Audio/HFlowContainer" unique_id=562168271]
+unique_name_in_owner = true
+layout_mode = 2
+text = "50%"
+
+[node name="HFlowContainer2" type="HFlowContainer" parent="TabContainer/Audio" unique_id=630951082]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Audio/HFlowContainer2" unique_id=1532261645]
+layout_mode = 2
+text = "Music volume"
+
+[node name="musicvol" type="HSlider" parent="TabContainer/Audio/HFlowContainer2" unique_id=1348811569]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 75.0
+
+[node name="musicvollabel" type="Label" parent="TabContainer/Audio/HFlowContainer2" unique_id=1774053481]
+layout_mode = 2
+text = "75%"
+
+[node name="About" type="VBoxContainer" parent="TabContainer" unique_id=1985007587]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
 
 [node name="versionlabel" type="Label" parent="TabContainer/About" unique_id=1395943504]
 unique_name_in_owner = true
@@ -128,5 +170,6 @@ text = "Save"
 [connection signal="button_down" from="TabContainer/Controls/rightstickforpan" to="." method="_on_rightstickforpan_button_down"]
 [connection signal="toggled" from="TabContainer/Controls/rightstickforpan" to="." method="_on_rightstickforpan_toggled"]
 [connection signal="text_changed" from="TabContainer/Player/HFlowContainer/nickname" to="." method="_on_nickname_text_changed"]
+[connection signal="value_changed" from="TabContainer/Audio/HFlowContainer/mastervol" to="." method="_on_mastervol_value_changed"]
 [connection signal="meta_clicked" from="TabContainer/About/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]
 [connection signal="pressed" from="savesettingsbtn" to="." method="_on_savesettingsbtn_pressed"]

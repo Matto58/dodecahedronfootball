@@ -10,6 +10,7 @@ const GAME_DEMO_NUM = 2
 @export var rotMod: float = 0.05
 @export var useAltPan: bool = false
 @export var nickname: String = "Player"
+@export var masterVolume: float = 0.5
 
 # TEST VALUES
 @export var a: String = "sdjhsjdhs"
