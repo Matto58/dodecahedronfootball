@@ -17,5 +17,5 @@ static func create(title: String, artist: String, trackURL: String, artistURL: S
 	s.trackURL = trackURL
 	s.artistURL = artistURL
 	s.license = license
-	s.stream = AudioStreamMP3.load_from_file(pathToMP3)
+	s.stream = load(pathToMP3)
 	return s
