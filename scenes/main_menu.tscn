@@ -116,9 +116,10 @@ layout_mode = 2
 max_text_lines = 2
 auto_width = true
 auto_height = true
-item_count = 2
-item_0/text = "Testing Map, by ilo Kiso"
-item_1/text = "Grounds, by ilo Kiso"
+item_count = 3
+item_0/text = "(choose from file)"
+item_1/text = "Testing Map, by ilo Kiso"
+item_2/text = "Grounds, by ilo Kiso"
 
 [node name="HFlowContainer" type="HFlowContainer" parent="HBoxContainer/PanelContainer/mapselect" unique_id=1644031984]
 layout_mode = 2
@@ -128,6 +129,18 @@ unique_name_in_owner = true
 layout_mode = 2
 disabled = true
 text = "Enter sandbox"
+
+[node name="selmap" type="FileDialog" parent="HBoxContainer/PanelContainer/mapselect" unique_id=1455818606]
+unique_name_in_owner = true
+oversampling_override = 1.0
+title = "Choose map from file"
+position = Vector2i(0, 36)
+ok_button_text = "Load"
+mode_overrides_title = false
+file_mode = 0
+display_mode = 1
+access = 2
+filters = PackedStringArray("*.tscn", "*.scn")
 
 [node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer" unique_id=819916223]
 layout_mode = 2
@@ -143,9 +156,26 @@ metadata/_custom_type_script = "uid://lllepfb0mbng"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=475077169]
 
+[node name="loadingscreen" type="ColorRect" parent="." unique_id=614990567]
+visible = false
+layout_mode = 0
+offset_right = 592.0
+offset_bottom = 257.0
+color = Color(0, 0, 0, 0.49803922)
+
+[node name="Label2" type="Label" parent="loadingscreen" unique_id=1673850373]
+layout_mode = 0
+offset_right = 206.0
+offset_bottom = 72.0
+text = "loading"
+label_settings = SubResource("LabelSettings_l6cm7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Container/Button4" to="." method="_on_button_4_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Container/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Container/Button3" to="." method="_on_button_3_pressed"]
 [connection signal="item_activated" from="HBoxContainer/PanelContainer/mapselect/maplist" to="." method="_on_maplist_item_activated"]
 [connection signal="item_selected" from="HBoxContainer/PanelContainer/mapselect/maplist" to="." method="_on_maplist_item_selected"]
 [connection signal="pressed" from="HBoxContainer/PanelContainer/mapselect/HFlowContainer/playmapsandbox" to="." method="_on_playmapsandbox_pressed"]
+[connection signal="file_selected" from="HBoxContainer/PanelContainer/mapselect/selmap" to="." method="_on_selmap_file_selected"]

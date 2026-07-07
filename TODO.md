@@ -16,4 +16,4 @@ Goals for Demo 3:
 - [ ] Local multiplayer:
 	- [ ] Color players appropriately
 	- [ ] Name tags + name customization in settings
-- [ ] Support for loading maps from a file
+- [x] Support for loading maps from a file

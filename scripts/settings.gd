@@ -3,8 +3,8 @@ extends Resource
 class_name Settoing # <-- yes this is a phighting reference. yes it is an intentional typo
 
 # GAME INFO CONSTS
-const GAME_VER = "0.2.3"
-const GAME_DEMO_NUM = 2
+const GAME_VER = "0.3.0"
+const GAME_DEMO_NUM = 3
 
 # PLAYER
 @export var rotMod: float = 0.05

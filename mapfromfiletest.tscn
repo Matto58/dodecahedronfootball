@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://c38ychbenp81w"]
+
+[ext_resource type="Script" uid="uid://c15203hxuye1w" path="res://scripts/map_logic.gd" id="1_ffa5k"]
+[ext_resource type="PackedScene" uid="uid://ba33y32xlma6q" path="res://scenes/goal.tscn" id="2_au84u"]
+[ext_resource type="PackedScene" uid="uid://bmdywebyaq56k" path="res://scenes/ball.tscn" id="2_fki5b"]
+[ext_resource type="PackedScene" uid="uid://bmlg7d06rvekb" path="res://scenes/player.tscn" id="3_fki5b"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2j1i5"]
+size = Vector3(25, 1, 25)
+
+[node name="Custommaptest" type="Node3D" unique_id=55357894]
+script = ExtResource("1_ffa5k")
+title = "Custom Map from a File"
+author = "ilo Kiso"
+metadata/_custom_type_script = "uid://b5se86qylwv8l"
+
+[node name="Timer" type="Timer" parent="." unique_id=998631182]
+wait_time = 600.0
+one_shot = true
+
+[node name="ball" parent="." unique_id=95649449 instance=ExtResource("2_fki5b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9496348, 0)
+
+[node name="goalyellow" parent="." unique_id=146667370 instance=ExtResource("2_au84u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+isYellow = true
+
+[node name="goalpurple" parent="." unique_id=1112858574 instance=ExtResource("2_au84u")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -8)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=231764762]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=536613504]
+mesh = SubResource("BoxMesh_2j1i5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1984052190]
+
+[node name="player" parent="." unique_id=1748714981 instance=ExtResource("3_fki5b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
+
+[node name="ball reset point" type="Node3D" parent="." unique_id=1929632037]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7388687, 0)
