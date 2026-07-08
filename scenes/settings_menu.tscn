@@ -179,9 +179,18 @@ Main menu tracks are under these licenses:%s
 [url]https://github.com/Matto58/dodecahedronfootball[/url]"
 fit_content = true
 
-[node name="savesettingsbtn" type="Button" parent="." unique_id=184736798]
+[node name="HFlowContainer" type="HBoxContainer" parent="." unique_id=1224536083]
 layout_mode = 2
+
+[node name="savesettingsbtn" type="Button" parent="HFlowContainer" unique_id=184736798]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Save"
+
+[node name="resetsettingsbtn" type="Button" parent="HFlowContainer" unique_id=814241211]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Undo changes"
 
 [connection signal="value_changed" from="TabContainer/Controls/HFlowContainer/rotsensitivity" to="." method="_on_rotationsensitivity_value_changed"]
 [connection signal="button_down" from="TabContainer/Controls/rightstickforpan" to="." method="_on_rightstickforpan_button_down"]
@@ -190,4 +199,5 @@ text = "Save"
 [connection signal="value_changed" from="TabContainer/Audio/HFlowContainer/mastervol" to="." method="_on_mastervol_value_changed"]
 [connection signal="item_selected" from="TabContainer/Audio/mainmenutrack" to="." method="_on_mainmenutrack_item_selected"]
 [connection signal="meta_clicked" from="TabContainer/About/abouttext" to="." method="_on_rich_text_label_meta_clicked"]
-[connection signal="pressed" from="savesettingsbtn" to="." method="_on_savesettingsbtn_pressed"]
+[connection signal="pressed" from="HFlowContainer/savesettingsbtn" to="." method="_on_savesettingsbtn_pressed"]
+[connection signal="pressed" from="HFlowContainer/resetsettingsbtn" to="." method="_on_resetsettingsbtn_pressed"]

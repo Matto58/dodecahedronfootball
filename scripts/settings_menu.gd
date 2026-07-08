@@ -3,6 +3,18 @@ extends VBoxContainer
 var musicMgr: MusicManager
 
 func _ready() -> void:
+	resetSettings()
+	var mainMenuTrackCopyrightNotice = ""
+	for t in MusicManager.mainMenuTracks:
+		#print("* %s by %s (download [here](%s)) - under the %s license" % [t.title, t.artist, t.trackURL, t.license])
+		%mainmenutrack.add_item(t.title + " by " + t.artist)
+		mainMenuTrackCopyrightNotice += "\n- %s by %s is under the %s license - [url=\"%s\"]get this track[/url] - [url=\"%s\"]visit the artist's website[/url]" % [t.title, t.artist, t.license, t.trackURL, t.artistURL]
+	%abouttext.text %= mainMenuTrackCopyrightNotice
+	%versionlabel.text = "Dodecahedron Football - Version " + Settoing.GAME_VER + " - Demo " + str(Settoing.GAME_DEMO_NUM)
+
+func resetSettings():
+	# for some reason, setting it to null first is the only way for the settings to actually reset
+	Settoing.activeInstance = null
 	Settoing.activeInstance = Settoing.loadFromFile()
 	if Settoing.activeInstance == null: Settoing.activeInstance = Settoing.new()
 
@@ -12,14 +24,7 @@ func _ready() -> void:
 	%nickname.text = Settoing.activeInstance.nickname
 	%mastervol.value = Settoing.activeInstance.masterVolume * 100
 	%mastervollabel.text = str(int(%mastervol.value)) + "%"
-	var mainMenuTrackCopyrightNotice = ""
-	for t in MusicManager.mainMenuTracks:
-		#print("* %s by %s (download [here](%s)) - under the %s license" % [t.title, t.artist, t.trackURL, t.license])
-		%mainmenutrack.add_item(t.title + " by " + t.artist)
-		mainMenuTrackCopyrightNotice += "\n- %s by %s is under the %s license - [url=\"%s\"]get this track[/url] - [url=\"%s\"]visit the artist's website[/url]" % [t.title, t.artist, t.license, t.trackURL, t.artistURL]
-	%abouttext.text %= mainMenuTrackCopyrightNotice
 	%mainmenutrack.selected = Settoing.activeInstance.mainMenuTrack
-	%versionlabel.text = "Dodecahedron Football - Version " + Settoing.GAME_VER + " - Demo " + str(Settoing.GAME_DEMO_NUM)
 
 func _on_rotationsensitivity_value_changed(value: float) -> void:
 	Settoing.activeInstance.rotMod = value / 100
@@ -46,6 +51,9 @@ func _on_mainmenutrack_item_selected(index: int) -> void:
 
 func _on_savesettingsbtn_pressed() -> void:
 	Settoing.saveToFile(Settoing.activeInstance)
+
+func _on_resetsettingsbtn_pressed() -> void:
+	resetSettings()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
