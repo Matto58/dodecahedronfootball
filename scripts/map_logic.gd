@@ -45,3 +45,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	$player/Camera3D/HUD/timerlabel.text = timeToStr(roundTimer.time_left)
+
+func _physics_process(delta: float) -> void:
+	$player.sprinting = Input.is_action_pressed("sprint")
+	$player.input_dir = Input.get_axis("forward", "backward")
+	$player.yumping = Input.is_action_just_pressed("yump")
+	$player.lookAroundDir = -(Input.get_axis("leftalt", "rightalt") if Settoing.activeInstance.useAltPan else Input.get_axis("left", "right"))
