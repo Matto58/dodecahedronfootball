@@ -9,6 +9,8 @@ Goals for Demo 2:
 - [x] Game timer (10 minutes for matches, 180 minutes for sandbox) (0.2.2)
 
 Goals for Demo 3:
+- [ ] Debug menu
+	- [ ] Console
 - [ ] Make Grounds a real map
 - [ ] Bots to play against
 	- [ ] Easy difficulty
