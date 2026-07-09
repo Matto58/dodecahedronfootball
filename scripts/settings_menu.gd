@@ -31,11 +31,9 @@ func _on_rotationsensitivity_value_changed(value: float) -> void:
 	%rotsensitivitylabel.text = str(value)
 
 func _on_rich_text_label_meta_clicked(meta: Variant) -> void:
-	print("OPENING url " + str(meta))
 	OS.shell_open(str(meta))
 
 func _on_rightstickforpan_toggled(toggled_on: bool) -> void:
-	print(toggled_on)
 	Settoing.activeInstance.useAltPan = toggled_on
 
 func _on_nickname_text_changed(new_text: String) -> void:
