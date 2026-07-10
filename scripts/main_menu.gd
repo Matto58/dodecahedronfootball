@@ -10,6 +10,8 @@ func switchToLoadedMap():
 	loadedMap.purpleBots = pb
 	loadedMap.yellowBots = yb
 	loadedMap.mainPlayerIsYellow = yello
+	if not $HBoxContainer/PanelContainer3.visible:
+		loadedMap.roundTimer.wait_time = 10800.0
 	get_tree().change_scene_to_node(loadedMap)
 
 func changeToMap(mapPathOrName: String, builtIn: bool = true):

@@ -110,4 +110,4 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18.5
 isYellow = true
 
 [node name="Timer" type="Timer" parent="." unique_id=1400241490]
-wait_time = 10800.0
+wait_time = 600.0
