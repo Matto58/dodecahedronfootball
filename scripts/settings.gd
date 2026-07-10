@@ -13,11 +13,6 @@ const GAME_DEMO_NUM = 3
 @export var masterVolume: float = 0.5
 @export var mainMenuTrack: int = 0
 
-# TEST VALUES
-@export var a: String = "sdjhsjdhs"
-@export var b: Array = []
-@export var c: int = 69
-
 static var activeInstance: Settoing
 
 static func saveToFile(s: Settoing):
