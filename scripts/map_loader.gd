@@ -18,7 +18,7 @@ static func validateMap(map: Map) -> bool:
 		return false
 	print("validating map %s by %s" % [map.title, map.author])
 
-	var requiredChildren: Array[String] = ["Timer", "ball", "goalyellow", "goalpurple", "ball reset point", "oob detector", "player"]
+	var requiredChildren: Array[String] = ["Timer", "ball", "goalyellow", "goalpurple", "ball reset point", "oob detector", "player", "clanker spawner"]
 	var valid = true
 	for node in requiredChildren:
 		if map.get_node(node) == null:

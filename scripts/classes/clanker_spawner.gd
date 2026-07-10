@@ -16,6 +16,7 @@ static var botNames: Array[String] = [
 	"Creature of Steel", # ultakil
 	"No Foot Only Ballin'", # i'm gonna fucking explode what did i write
 	"010001110110000101111001", # me
+	"crouton.net",
 ]
 
 ## creates `count` bots and moves them to their respective team's spawnpoints, while also making them children of this node
@@ -25,7 +26,7 @@ func spawn(count: int, onYellowSide: bool, easyDiff: bool = true) -> Array[Clank
 	if spawnpointsPurple == null or spawnpointsYellow == null:
 		printerr("cannot spawn bots: neither team's spawnpoints are valid")
 		return []
-	var spawnpoints: Array[Vector4] = (spawnpointsYellow if onYellowSide else spawnpointsPurple).map(func(x): return x)
+	var spawnpoints: Array[Vector4] = (spawnpointsYellow if onYellowSide else spawnpointsPurple).duplicate()
 	if count > spawnpoints.size():
 		printerr("cannot spawn bots: tried to spawn %d bots on a map with %d spawnpoints for the %s side" % [count, spawnpoints.size(), "yellow" if onYellowSide else "purple"])
 		return []
@@ -35,17 +36,12 @@ func spawn(count: int, onYellowSide: bool, easyDiff: bool = true) -> Array[Clank
 
 	var spawnedBots: Array[Clanker] = []
 	for i in range(count):
-		var spInx = randi_range(0, spawnpoints.size())
-		var sp = spawnpoints[spInx]
-		spawnpoints.remove_at(spInx)
 		var bot = createBot(onYellowSide, easyDiff)
-		bot.global_position = Vector3(sp.x, sp.y, sp.z)
-		bot.global_rotation_degrees = Vector3(0.0, sp.w, 0.0)
 		bot.name = "AI '%s'" % bot.nickname
 
-		var ogName = bot.name
+		var ogName = bot.nickname
 		var dupNum = 1
-		while has_node(bot.name):
+		while has_node(NodePath(bot.name)):
 			print("bot named '%s' already exists, giving duplicate name" % bot.nickname)
 			bot.nickname = "%s (%d)" % [ogName, dupNum]
 			bot.name = "AI '%s'" % bot.nickname
@@ -53,7 +49,14 @@ func spawn(count: int, onYellowSide: bool, easyDiff: bool = true) -> Array[Clank
 
 		add_child(bot)
 		spawnedBots.append(bot)
-		print("spawned bot '{}' at {}" % [bot.nickname, bot.global_position])
+
+		var spInx = randi_range(0, spawnpoints.size()-1)
+		var sp = spawnpoints[spInx]
+		spawnpoints.remove_at(spInx)
+		bot.global_position = Vector3(sp.x, sp.y, sp.z)
+		bot.global_rotation_degrees = Vector3(0.0, sp.w, 0.0)
+
+		print("spawned %s bot '%s' at %s" % ["yellow" if bot.isYellow else "purple", bot.nickname, bot.global_position])
 	return spawnedBots
 
 static func createBot(isYellow: bool, easyDiff: bool) -> Clanker:
@@ -61,4 +64,13 @@ static func createBot(isYellow: bool, easyDiff: bool) -> Clanker:
 	bot.isYellow = isYellow
 	bot.isEasyDifficulty = easyDiff
 	bot.nickname = botNames.pick_random()
+
+	var coll = CollisionShape3D.new()
+	coll.name = "CollisionShape3D"
+	coll.shape = preload("res://misc/player_collision.tres")
+	bot.add_child(coll)
+	var mesh = MeshInstance3D.new()
+	mesh.name = "MeshInstance3D"
+	mesh.mesh = preload("res://misc/player_mesh.tres").duplicate()
+	bot.add_child(mesh)
 	return bot

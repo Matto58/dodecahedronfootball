@@ -45,6 +45,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8, 2.5, 0)
 
 [node name="clanker spawner" parent="." unique_id=1932460306 instance=ExtResource("3_8vdae")]
+spawnpointsPurple = Array[Vector4]([Vector4(-12, 2.5, -5, -90), Vector4(-11, 2.5, -2.5, -90), Vector4(-10, 2.5, 0, -90), Vector4(-11, 2.5, 2.5, -90), Vector4(-12, 2.5, 5, -90)])
+spawnpointsYellow = Array[Vector4]([Vector4(12, 2.5, -5, 90), Vector4(11, 2.5, -2.5, 90), Vector4(10, 2.5, 0, 90), Vector4(11, 2.5, 2.5, 90), Vector4(12, 2.5, 5, 90)])
 
 [node name="floor" type="StaticBody3D" parent="." unique_id=914429687]
 

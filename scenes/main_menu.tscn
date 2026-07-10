@@ -36,6 +36,8 @@ subpixel_positioning = 0
 font = SubResource("SystemFont_l6cm7")
 font_size = 30
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_bqqt6"]
+
 [node name="main menu" type="Control" unique_id=384968760]
 layout_mode = 3
 anchors_preset = 15
@@ -76,8 +78,7 @@ layout_mode = 2
 
 [node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/Container" unique_id=1506004718]
 layout_mode = 2
-disabled = true
-text = "Play (WIP)"
+text = "Play"
 
 [node name="Button4" type="Button" parent="HBoxContainer/VBoxContainer/Container" unique_id=1932089327]
 layout_mode = 2
@@ -98,6 +99,88 @@ text = "♫ Now playing: Lemon Demon - Two Trucks"
 
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer" unique_id=314881342]
 layout_mode = 2
+
+[node name="PanelContainer3" type="PanelContainer" parent="HBoxContainer" unique_id=2102375493]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer3" unique_id=690735395]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="HBoxContainer/PanelContainer3/VBoxContainer" unique_id=1621800090]
+layout_mode = 2
+text = "NOTE: Playing with multiple people is not implemented yet!"
+
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer3/VBoxContainer" unique_id=90851218]
+layout_mode = 2
+text = "host server"
+label_settings = SubResource("LabelSettings_ekxnf")
+
+[node name="HFlowContainer" type="HFlowContainer" parent="HBoxContainer/PanelContainer3/VBoxContainer" unique_id=1678652588]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer3/VBoxContainer/HFlowContainer" unique_id=1519797276]
+layout_mode = 2
+text = "Bots on purple side:"
+
+[node name="purplebotsbox" type="SpinBox" parent="HBoxContainer/PanelContainer3/VBoxContainer/HFlowContainer" unique_id=976730735]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 4.0
+alignment = 2
+select_all_on_focus = true
+
+[node name="HFlowContainer2" type="HFlowContainer" parent="HBoxContainer/PanelContainer3/VBoxContainer" unique_id=1123408047]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer3/VBoxContainer/HFlowContainer2" unique_id=710781141]
+layout_mode = 2
+text = "Bots on yellow side:"
+
+[node name="yellowbotsbox" type="SpinBox" parent="HBoxContainer/PanelContainer3/VBoxContainer/HFlowContainer2" unique_id=155085207]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 4.0
+alignment = 2
+select_all_on_focus = true
+
+[node name="HFlowContainer3" type="HFlowContainer" parent="HBoxContainer/PanelContainer3/VBoxContainer" unique_id=588991007]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer3/VBoxContainer/HFlowContainer3" unique_id=1818079759]
+layout_mode = 2
+text = "Join team:"
+
+[node name="randteam" type="CheckBox" parent="HBoxContainer/PanelContainer3/VBoxContainer/HFlowContainer3" unique_id=554318464]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+button_pressed = true
+button_group = SubResource("ButtonGroup_bqqt6")
+text = "Random"
+
+[node name="pteam" type="CheckBox" parent="HBoxContainer/PanelContainer3/VBoxContainer/HFlowContainer3" unique_id=1475349935]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+button_group = SubResource("ButtonGroup_bqqt6")
+text = "Purple"
+
+[node name="yteam" type="CheckBox" parent="HBoxContainer/PanelContainer3/VBoxContainer/HFlowContainer3" unique_id=124035988]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+button_group = SubResource("ButtonGroup_bqqt6")
+text = "Yellow"
+
+[node name="selmapopenbtn" type="Button" parent="HBoxContainer/PanelContainer3/VBoxContainer" unique_id=798369686]
+layout_mode = 2
+text = "Select map..."
+
+[node name="Label2" type="Label" parent="HBoxContainer/PanelContainer3/VBoxContainer" unique_id=959888696]
+visible = false
+layout_mode = 2
+text = "join server"
+label_settings = SubResource("LabelSettings_ekxnf")
 
 [node name="PanelContainer" type="PanelContainer" parent="HBoxContainer" unique_id=657258046]
 layout_mode = 2
@@ -128,7 +211,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 disabled = true
-text = "Enter sandbox"
+text = "Play"
 
 [node name="selmap" type="FileDialog" parent="HBoxContainer/PanelContainer/mapselect" unique_id=1455818606]
 unique_name_in_owner = true
@@ -172,9 +255,11 @@ label_settings = SubResource("LabelSettings_l6cm7")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Container/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Container/Button4" to="." method="_on_button_4_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Container/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Container/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="HBoxContainer/PanelContainer3/VBoxContainer/selmapopenbtn" to="." method="_on_selmapopenbtn_pressed"]
 [connection signal="item_activated" from="HBoxContainer/PanelContainer/mapselect/maplist" to="." method="_on_maplist_item_activated"]
 [connection signal="item_selected" from="HBoxContainer/PanelContainer/mapselect/maplist" to="." method="_on_maplist_item_selected"]
 [connection signal="pressed" from="HBoxContainer/PanelContainer/mapselect/HFlowContainer/playmapsandbox" to="." method="_on_playmapsandbox_pressed"]

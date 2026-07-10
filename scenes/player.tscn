@@ -2,14 +2,10 @@
 
 [ext_resource type="Script" uid="uid://ctvrdn4fpbrqv" path="res://scripts/player.gd" id="1_4flbx"]
 [ext_resource type="Material" uid="uid://deq4jfd6yctbe" path="res://misc/skybox.tres" id="2_onrkg"]
-[ext_resource type="Material" uid="uid://d3qicmrabgrbm" path="res://mats/goalourple.tres" id="2_tuyoq"]
-[ext_resource type="Material" uid="uid://cg0kx4l5arnyb" path="res://mats/goalyello.tres" id="3_fjrip"]
 [ext_resource type="PackedScene" uid="uid://6glcw70ftxdt" path="res://scenes/hud.tscn" id="3_qhqgy"]
 [ext_resource type="PackedScene" uid="uid://du5ra3k5noqb7" path="res://scenes/pause_menu.tscn" id="4_dqkch"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
+[ext_resource type="Shape3D" uid="uid://cpogngobq8wop" path="res://misc/player_collision.tres" id="4_smehm"]
+[ext_resource type="CapsuleMesh" uid="uid://rtu6piay3eh2" path="res://misc/player_mesh.tres" id="5_ur7pv"]
 
 [sub_resource type="Sky" id="Sky_i3pqv"]
 sky_material = ExtResource("2_onrkg")
@@ -20,15 +16,13 @@ sky = SubResource("Sky_i3pqv")
 
 [node name="player" type="CharacterBody3D" unique_id=1748714981]
 script = ExtResource("1_4flbx")
-purpleMaterial = ExtResource("2_tuyoq")
-yellowMaterial = ExtResource("3_fjrip")
 metadata/_custom_type_script = "uid://ctvrdn4fpbrqv"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=455418228]
-shape = SubResource("CapsuleShape3D_sh265")
+shape = ExtResource("4_smehm")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2081410353]
-mesh = SubResource("CapsuleMesh_4flbx")
+mesh = ExtResource("5_ur7pv")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=796718161]
 transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0.75, -0.25)

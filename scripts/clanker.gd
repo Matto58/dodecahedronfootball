@@ -16,10 +16,18 @@ var isOnOwnSide: bool
 # values utilized to make the next step
 var currentTarget: AITargets = AITargets.SelfToBall
 
+func _ready() -> void:
+	print("%s (isYellow=%s)" % [nickname, isYellow])
+	getMovement.connect(inputSim)
+	$MeshInstance3D.mesh.surface_set_material(0, YELLOW_MATERIAL if isYellow else PURPLE_MATERIAL)
+
+func newTarget(t: AITargets):
+	print("%s is changing targets from %s to %s" % [nickname, AITargets.keys()[currentTarget], AITargets.keys()[t]])
+	currentTarget = t
+
 # returns distance towards target
 func moveSelfTowards(target: Node3D) -> Vector2:
-	var distanceToTarget3D = target.global_position - global_position
-	var distanceToTarget2D = Vector2(distanceToTarget3D.x, distanceToTarget3D.z).rotated(global_rotation.y)
+	var distanceToTarget2D = calcDist2D(target)
 	if distanceToTarget2D.y > 0:
 		# todo: check if we're basically head-on with the target and don't rotate if we are
 		lookAroundDir = 1.0 if distanceToTarget2D.x > 0 else -1.0
@@ -30,7 +38,16 @@ func moveSelfTowards(target: Node3D) -> Vector2:
 		lookAroundDir = 1.0
 	return distanceToTarget2D
 
-func _physics_process(delta: float) -> void:
+func calcDist3D(target: Node3D):
+	return target.global_position - global_position
+
+func calcDist2DFrom3D(dist: Vector3):
+	return Vector2(dist.x, dist.z).rotated(global_rotation.y)
+
+func calcDist2D(target: Node3D):
+	return calcDist2DFrom3D(calcDist3D(target))
+
+func inputSim(delta: float) -> void:
 	input_dir = 1.0
 	# todo: for hard difficulty, go to the middle where the ball should spawn if ball is below the map
 	match currentTarget:
@@ -39,14 +56,17 @@ func _physics_process(delta: float) -> void:
 			lookAroundDir = 0.0
 		AITargets.SelfToBall:
 			var distanceToBall2D = moveSelfTowards(ballTarget)
-			if distanceToBall2D.length() < 0.25 and not isOnOwnSide:
-				currentTarget = AITargets.BallToOppositeGoal
+			if distanceToBall2D.length() < 1.5:
+				newTarget(AITargets.BallToOppositeGoal)
 		AITargets.BallToOppositeGoal:
+			yumping = true
 			# opp can be opponent or opposite. pick your poison
 			var distanceToOppGoal2D = moveSelfTowards(purpleGoal if isYellow else yellowGoal)
-			if distanceToOppGoal2D.length() > 1:
-				currentTarget = AITargets.SelfToOwnGoal if isOnOwnSide else AITargets.BallToOppositeGoal
+			if calcDist2D(ballTarget).length() > 5:
+				newTarget(AITargets.SelfToBall)
+			if distanceToOppGoal2D.length() < 2.5:
+				newTarget(AITargets.SelfToOwnGoal if isOnOwnSide else AITargets.SelfToBall)
 		AITargets.SelfToOwnGoal:
 			var distanceToOwnGoal2D = moveSelfTowards(yellowGoal if isYellow else purpleGoal)
 			if distanceToOwnGoal2D.length() > 1 and isOnOwnSide:
-				currentTarget = AITargets.SelfToBall
+				newTarget(AITargets.SelfToBall)
