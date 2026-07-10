@@ -111,3 +111,5 @@ isYellow = true
 
 [node name="Timer" type="Timer" parent="." unique_id=1400241490]
 wait_time = 600.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
