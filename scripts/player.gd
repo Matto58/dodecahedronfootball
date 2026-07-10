@@ -36,6 +36,11 @@ func _process(delta: float) -> void:
 		$Camera3D/pause_menu.visible = not $Camera3D/pause_menu.visible
 
 func _physics_process(delta: float) -> void:
+	input_dir = minf(1.0, input_dir)
+	input_dir = maxf(-1.0, input_dir)
+	lookAroundDir = minf(1.0, lookAroundDir)
+	lookAroundDir = maxf(-1.0, lookAroundDir)
+
 	var sprintMod: float = 1.75 if stamina >= 0.01 and sprinting else 1.0
 	if not is_on_floor():
 		velocity += get_gravity() * delta
