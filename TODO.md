@@ -13,7 +13,7 @@ Goals for Demo 3:
 	- [ ] Console
 - [ ] Make Grounds a real map
 - [ ] Bots to play against
-	- [ ] Easy difficulty
+	- [x] Easy difficulty
 	- [ ] Hard difficulty
 - [ ] Local multiplayer:
 	- [ ] Color players appropriately

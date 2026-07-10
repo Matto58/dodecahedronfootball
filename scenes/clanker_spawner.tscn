@@ -1,3 +1,6 @@
 [gd_scene format=3 uid="uid://bs5lkulr3ejkl"]
 
+[ext_resource type="Script" uid="uid://cpye5eib8awpa" path="res://scripts/classes/clanker_spawner.gd" id="1_6mfus"]
+
 [node name="clanker spawner" type="Node3D" unique_id=1932460306]
+script = ExtResource("1_6mfus")

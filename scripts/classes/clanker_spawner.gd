@@ -1,0 +1,64 @@
+extends Node3D
+
+class_name ClankerSpawner
+
+# xyz is position, w is y rotation in degrees
+@export var spawnpointsPurple: Array[Vector4]
+@export var spawnpointsYellow: Array[Vector4]
+
+# tf2 style
+# todo: come up with more that aren't as corny
+static var botNames: Array[String] = [
+	"ilo moli", # "death machine" in toki pona - also a palindrome, fun fact
+	"B33PB00P",
+	"Only A Robor :(",
+	"I am a robot", # funny captcha reference
+	"Creature of Steel", # ultakil
+	"No Foot Only Ballin'", # i'm gonna fucking explode what did i write
+	"010001110110000101111001", # me
+]
+
+## creates `count` bots and moves them to their respective team's spawnpoints, while also making them children of this node
+## returns the array of spawned bots if successfully spawned, otherwise an empty array if something went wrong
+## spawned bots will by default have no valid target nodes and their AITargets will be None. it is the job of the script calling this function to assign the targets 
+func spawn(count: int, onYellowSide: bool, easyDiff: bool = true) -> Array[Clanker]:
+	if spawnpointsPurple == null or spawnpointsYellow == null:
+		printerr("cannot spawn bots: neither team's spawnpoints are valid")
+		return []
+	var spawnpoints: Array[Vector4] = (spawnpointsYellow if onYellowSide else spawnpointsPurple).map(func(x): return x)
+	if count > spawnpoints.size():
+		printerr("cannot spawn bots: tried to spawn %d bots on a map with %d spawnpoints for the %s side" % [count, spawnpoints.size(), "yellow" if onYellowSide else "purple"])
+		return []
+	if count < 0:
+		printerr("cannot spawn %d bots. seriously wtf were you thinking" % count)
+		return []
+
+	var spawnedBots: Array[Clanker] = []
+	for i in range(count):
+		var spInx = randi_range(0, spawnpoints.size())
+		var sp = spawnpoints[spInx]
+		spawnpoints.remove_at(spInx)
+		var bot = createBot(onYellowSide, easyDiff)
+		bot.global_position = Vector3(sp.x, sp.y, sp.z)
+		bot.global_rotation_degrees = Vector3(0.0, sp.w, 0.0)
+		bot.name = "AI '%s'" % bot.nickname
+
+		var ogName = bot.name
+		var dupNum = 1
+		while has_node(bot.name):
+			print("bot named '%s' already exists, giving duplicate name" % bot.nickname)
+			bot.nickname = "%s (%d)" % [ogName, dupNum]
+			bot.name = "AI '%s'" % bot.nickname
+			dupNum += 1
+
+		add_child(bot)
+		spawnedBots.append(bot)
+		print("spawned bot '{}' at {}" % [bot.nickname, bot.global_position])
+	return spawnedBots
+
+static func createBot(isYellow: bool, easyDiff: bool) -> Clanker:
+	var bot = Clanker.new()
+	bot.isYellow = isYellow
+	bot.isEasyDifficulty = easyDiff
+	bot.nickname = botNames.pick_random()
+	return bot
