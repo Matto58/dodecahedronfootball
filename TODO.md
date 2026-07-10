@@ -16,6 +16,6 @@ Goals for Demo 3:
 	- [x] Easy difficulty
 	- [ ] Hard difficulty
 - [ ] Local multiplayer:
-	- [ ] Color players appropriately
-	- [ ] Name tags + name customization in settings
+	- [x] Color players appropriately
+	- [x] Name tags + name customization in settings
 - [x] Support for loading maps from a file
