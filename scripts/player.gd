@@ -35,6 +35,15 @@ func _ready() -> void:
 func initPlayerNickInHUD():
 	$Camera3D/HUD/RichTextLabel.append_text("[color=\"#999\"]Playing as[/color] [b][color=\"#%s\"]%s[/color][/b]" % ["ff0" if isYellow else "7f00ff", nickname])
 
+func createNametag():
+	var tag = Label3D.new()
+	add_child(tag)
+	tag.position = Vector3(0, 1.25, 0)
+	tag.name = "nametag"
+	tag.text = nickname
+	tag.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	tag.font_size = 64
+
 func _process(delta: float) -> void:
 	if not has_node("Camera3D"): return
 	$Camera3D/HUD/staminabar.size.x = $Camera3D/HUD/ColorRect2.size.x * stamina

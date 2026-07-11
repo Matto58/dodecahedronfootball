@@ -36,6 +36,7 @@ func _ready() -> void:
 	$player.nickname = Settoing.activeInstance.nickname
 	$player.isYellow = mainPlayerIsYellow
 	$player.initPlayerNickInHUD()
+	$player.createNametag()
 	$player/Camera3D/HUD/mapprops/author.text = "by " + author
 	$player/Camera3D/HUD/mapprops/name.text = title
 	$"oob detector".body_entered.connect(func(body):
@@ -53,11 +54,13 @@ func _ready() -> void:
 		pBot.yellowGoal = $goalyellow
 		pBot.ballTarget = $ball
 		pBot.newTarget(Clanker.AITargets.SelfToBall)
+		pBot.createNametag()
 	for yBot in spawnedY:
 		yBot.purpleGoal = $goalpurple
 		yBot.yellowGoal = $goalyellow
 		yBot.ballTarget = $ball
 		yBot.newTarget(Clanker.AITargets.SelfToBall)
+		yBot.createNametag()
 
 	roundTimer.start()
 

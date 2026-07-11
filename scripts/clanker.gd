@@ -14,7 +14,7 @@ var isEasyDifficulty: bool = true # does nothing as of yet
 var isOnOwnSide: bool
 
 # values utilized to make the next step
-var currentTarget: AITargets = AITargets.SelfToBall
+var currentTarget: AITargets = AITargets.None
 
 func _ready() -> void:
 	print("%s (isYellow=%s)" % [nickname, isYellow])
