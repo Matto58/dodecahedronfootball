@@ -49,6 +49,7 @@ func _process(delta: float) -> void:
 	$Camera3D/HUD/staminabar.size.x = $Camera3D/HUD/ColorRect2.size.x * stamina
 	if Input.is_action_just_pressed("pause"):
 		$Camera3D/pause_menu.visible = not $Camera3D/pause_menu.visible
+		$Console.visible = $Camera3D/pause_menu.visible
 
 func _physics_process(delta: float) -> void:
 	getMovement.emit(delta)

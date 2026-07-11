@@ -37,6 +37,7 @@ func _ready() -> void:
 	$player.isYellow = mainPlayerIsYellow
 	$player.initPlayerNickInHUD()
 	$player.createNametag()
+	$player/Console.map = self
 	$player/Camera3D/HUD/mapprops/author.text = "by " + author
 	$player/Camera3D/HUD/mapprops/name.text = title
 	$"oob detector".body_entered.connect(func(body):
