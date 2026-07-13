@@ -19,10 +19,11 @@ static var botNames: Array[String] = [
 	"crouton.net",
 ]
 
-## creates `count` bots and moves them to their respective team's spawnpoints, while also making them children of this node
+## creates `count` bots, assigns them all the username specified and moves them to their respective team's spawnpoints, while also making them children of this node
+## if `username` is blank, then gives a random username to each one
 ## returns the array of spawned bots if successfully spawned, otherwise an empty array if something went wrong
 ## spawned bots will by default have no valid target nodes and their AITargets will be None. it is the job of the script calling this function to assign the targets 
-func spawn(count: int, onYellowSide: bool, easyDiff: bool = true) -> Array[Clanker]:
+func spawn(count: int, onYellowSide: bool, nickname: String = "", easyDiff: bool = true) -> Array[Clanker]:
 	if spawnpointsPurple == null or spawnpointsYellow == null:
 		printerr("cannot spawn bots: neither team's spawnpoints are valid")
 		return []
@@ -37,6 +38,7 @@ func spawn(count: int, onYellowSide: bool, easyDiff: bool = true) -> Array[Clank
 	var spawnedBots: Array[Clanker] = []
 	for i in range(count):
 		var bot = createBot(onYellowSide, easyDiff)
+		if not nickname.is_empty(): bot.nickname = nickname
 		bot.name = "AI '%s'" % bot.nickname
 
 		var ogName = bot.nickname

@@ -12,53 +12,71 @@ subpixel_positioning = 0
 font = SubResource("SystemFont_uahpa")
 font_size = 30
 
-[node name="pause_menu" type="PanelContainer" unique_id=834532244]
+[node name="pause_menu" type="Control" unique_id=382950940]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n87rw")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1208720098]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.24705882)
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1489069267]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -33.0
-offset_top = -12.0
-offset_right = 33.0
-offset_bottom = 12.0
+offset_left = -60.0
+offset_top = -87.5
+offset_right = 60.0
+offset_bottom = 87.5
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_n87rw")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=722130919]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=722130919]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=812243347]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer" unique_id=812243347]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=955890071]
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer" unique_id=955890071]
 layout_mode = 2
 text = "paused"
 label_settings = SubResource("LabelSettings_n87rw")
 
-[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=1123713001]
+[node name="Button" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer" unique_id=1123713001]
 layout_mode = 2
 text = "Unpause"
 
-[node name="Button2" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=1042050207]
+[node name="Button2" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer" unique_id=1042050207]
 layout_mode = 2
 text = "Settings"
 
-[node name="Button3" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=2016021636]
+[node name="Button3" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer" unique_id=2016021636]
 layout_mode = 2
 disabled = true
 text = "Spectate (WIP)"
 
-[node name="Button4" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=1967195028]
+[node name="Button4" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer" unique_id=1967195028]
 layout_mode = 2
 text = "Quit to menu"
 
-[node name="settoing" parent="HBoxContainer" unique_id=899003022 instance=ExtResource("2_myx47")]
+[node name="settoing" parent="PanelContainer/HBoxContainer" unique_id=899003022 instance=ExtResource("2_myx47")]
 visible = false
 layout_mode = 2
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/Button4" to="." method="_on_button_4_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer/Button4" to="." method="_on_button_4_pressed"]

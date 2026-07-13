@@ -1,10 +1,10 @@
-extends PanelContainer
+extends Control
 
 func _on_button_pressed() -> void:
 	hide()
 
 func _on_button_2_pressed() -> void:
-	$HBoxContainer/settoing.visible = not $HBoxContainer/settoing.visible
+	$PanelContainer/HBoxContainer/settoing.visible = not $PanelContainer/HBoxContainer/settoing.visible
 
 func _on_button_4_pressed() -> void:
 	# todo: add "are you sure" message
@@ -12,4 +12,4 @@ func _on_button_4_pressed() -> void:
 
 func _on_visibility_changed() -> void:
 	if visible:
-		$HBoxContainer/VBoxContainer/Button.grab_focus()
+		$PanelContainer/HBoxContainer/VBoxContainer/Button.grab_focus()

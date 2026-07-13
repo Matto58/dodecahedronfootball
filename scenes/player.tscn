@@ -20,6 +20,7 @@ script = ExtResource("1_4flbx")
 metadata/_custom_type_script = "uid://ctvrdn4fpbrqv"
 
 [node name="Console" parent="." unique_id=1667808087 instance=ExtResource("2_fjrip")]
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=455418228]
 shape = ExtResource("4_smehm")

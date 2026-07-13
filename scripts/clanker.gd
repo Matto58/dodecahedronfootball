@@ -48,6 +48,11 @@ func calcDist2D(target: Node3D):
 	return calcDist2DFrom3D(calcDist3D(target))
 
 func inputSim(delta: float) -> void:
+	if paused:
+		input_dir = 0.0
+		lookAroundDir = 0.0
+		return
+
 	input_dir = 1.0
 	# todo: for hard difficulty, go to the middle where the ball should spawn if ball is below the map
 	match currentTarget:

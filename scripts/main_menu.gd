@@ -53,7 +53,7 @@ func _ready() -> void:
 	$HBoxContainer/PanelContainer3.hide()
 	get_window().title = "Dodecahedron Football Demo " + str(Settoing.GAME_DEMO_NUM) + " [v" + Settoing.GAME_VER + "]"
 	%democounter.text = "demo " + str(Settoing.GAME_DEMO_NUM)
-	$HBoxContainer/VBoxContainer/Container/Button4.grab_focus()
+	$HBoxContainer/VBoxContainer/Container/Button.grab_focus()
 
 	$MusicManager.onNewTrackSelected.connect(updateTrackDisplay)
 	if Settoing.activeInstance.mainMenuTrack != 0:

@@ -51,23 +51,18 @@ func _ready() -> void:
 	spawnedP = $"clanker spawner".spawn(purpleBots, false)
 	spawnedY = $"clanker spawner".spawn(yellowBots, true)
 	for pBot in spawnedP:
-		pBot.purpleGoal = $goalpurple
-		pBot.yellowGoal = $goalyellow
-		pBot.ballTarget = $ball
-		pBot.newTarget(Clanker.AITargets.SelfToBall)
-		pBot.createNametag()
+		initBot(pBot)
 	for yBot in spawnedY:
-		yBot.purpleGoal = $goalpurple
-		yBot.yellowGoal = $goalyellow
-		yBot.ballTarget = $ball
-		yBot.newTarget(Clanker.AITargets.SelfToBall)
-		yBot.createNametag()
+		initBot(yBot)
 
 	roundTimer.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	$player/Camera3D/HUD/timerlabel.text = timeToStr(roundTimer.time_left)
+	if Input.is_action_just_pressed("pause"):
+		$player.paused = not $player.paused
+		$player/Console.visible = $player.paused
 
 func _physics_process(delta: float) -> void:
 	$player.sprinting = Input.is_action_pressed("sprint")
@@ -76,10 +71,23 @@ func _physics_process(delta: float) -> void:
 	$player.lookAroundDir = -(Input.get_axis("leftalt", "rightalt") if Settoing.activeInstance.useAltPan else Input.get_axis("left", "right"))
 	$player.sensitivity = Settoing.activeInstance.rotMod
 
-	for pBot in spawnedP:
-		pBot.isOnOwnSide = pBot.global_position.x < 0
-	for yBot in spawnedY:
-		yBot.isOnOwnSide = yBot.global_position.x > 0
+	for i in range(spawnedP.size()):
+		if spawnedP[i] == null:
+			spawnedP.pop_at(i)
+		else:
+			spawnedP[i].isOnOwnSide = spawnedP[i].global_position.x < 0
+	for i in range(spawnedY.size()):
+		if spawnedY[i] == null:
+			spawnedY.pop_at(i)
+		else:
+			spawnedY[i].isOnOwnSide = spawnedY[i].global_position.x < 0
+
+func initBot(bot: Clanker):
+	bot.purpleGoal = $goalpurple
+	bot.yellowGoal = $goalyellow
+	bot.ballTarget = $ball
+	bot.newTarget(Clanker.AITargets.SelfToBall)
+	bot.createNametag()
 
 func _on_timer_timeout() -> void:
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

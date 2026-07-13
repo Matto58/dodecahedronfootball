@@ -47,9 +47,7 @@ func createNametag():
 func _process(delta: float) -> void:
 	if not has_node("Camera3D"): return
 	$Camera3D/HUD/staminabar.size.x = $Camera3D/HUD/ColorRect2.size.x * stamina
-	if Input.is_action_just_pressed("pause"):
-		$Camera3D/pause_menu.visible = not $Camera3D/pause_menu.visible
-		$Console.visible = $Camera3D/pause_menu.visible
+	$Camera3D/pause_menu.visible = paused
 
 func _physics_process(delta: float) -> void:
 	getMovement.emit(delta)
