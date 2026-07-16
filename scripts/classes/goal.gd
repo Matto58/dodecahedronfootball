@@ -15,13 +15,13 @@ func _ready() -> void:
 
 	$ballenter.body_entered.connect(func(body):
 		if body.name != "ball": return
-		print("firing off! ball has entered goal enter area")
+		#print("firing off! ball has entered goal enter area")
 		if not canScoreBall: return
 		canScoreBall = false
 		onGoalScore.emit(isYellow)
 	)
 	$ballexit.body_exited.connect(func(body):
 		if body.name != "ball": return
-		print("firing off! ball has exited goal exit area")
+		#print("firing off! ball has exited goal exit area")
 		canScoreBall = true
 	)

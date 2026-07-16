@@ -27,6 +27,10 @@ func timeToStr(seconds: float):
 	var secondsComponent = int(seconds - minutes*60)
 	return str(minutes) + ":" + str(secondsComponent).pad_zeros(2)
 
+func playerSetBallPos(pos: Vector3, rot: Vector3):
+	$ball.global_position = pos
+	$ball.global_rotation = rot
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	resetBall()
@@ -52,8 +56,12 @@ func _ready() -> void:
 	spawnedY = $"clanker spawner".spawn(yellowBots, true)
 	for pBot in spawnedP:
 		initBot(pBot)
+		pBot.setBallPos.connect(playerSetBallPos)
 	for yBot in spawnedY:
 		initBot(yBot)
+		yBot.setBallPos.connect(playerSetBallPos)
+
+	$player.setBallPos.connect(playerSetBallPos)
 
 	roundTimer.start()
 
@@ -70,6 +78,10 @@ func _physics_process(delta: float) -> void:
 	$player.yumping = Input.is_action_just_pressed("yump")
 	$player.lookAroundDir = -(Input.get_axis("leftalt", "rightalt") if Settoing.activeInstance.useAltPan else Input.get_axis("left", "right"))
 	$player.sensitivity = Settoing.activeInstance.rotMod
+	$player.holdingBall = Input.is_action_pressed("holding_ball")
+	# todo: make the check less often? .length() is really fucken expensive and doing it 240x/sec is no good for the cpu
+	$player.canHoldBall = ($player.global_position - $ball.global_position).length() < 3.0
+	$player/Camera3D.rotation.y = PI if Input.is_action_pressed("lookin_back") else 0.0
 
 	for i in range(spawnedP.size()):
 		if spawnedP[i] == null:

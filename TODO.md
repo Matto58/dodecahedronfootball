@@ -10,7 +10,7 @@ Goals for Demo 2:
 
 Goals for Demo 3:
 - [ ] Debug menu
-	- [ ] Console
+	- [x] Console
 - [ ] Make Grounds a real map
 - [ ] Bots to play against
 	- [x] Easy difficulty
