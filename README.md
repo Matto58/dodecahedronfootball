@@ -7,6 +7,8 @@ In the format of keyboard (Xbox controller) - action:
 * A/D (left stick left/right) - look left/right
 * Shift (X or left stick press) - sprint (uses stamina)
 * Space (A) - jump
+* RMB (LB) - look backwards
+* E (RB) - hold ball (uses stamina)
 * Esc (Menu) - pause
 ## All built-in maps
 * Testing Map, by ilo Kiso (@Matto58)
