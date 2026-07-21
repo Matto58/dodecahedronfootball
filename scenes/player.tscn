@@ -16,6 +16,7 @@ background_mode = 2
 sky = SubResource("Sky_i3pqv")
 
 [node name="player" type="CharacterBody3D" unique_id=1748714981]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 script = ExtResource("1_4flbx")
 metadata/_custom_type_script = "uid://ctvrdn4fpbrqv"
 
@@ -29,7 +30,7 @@ shape = ExtResource("4_smehm")
 mesh = ExtResource("5_ur7pv")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=796718161]
-transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0.75, -0.25)
+transform = Transform3D(-1, 4.371139e-08, -7.5710346e-08, 0, 0.8660254, 0.5, 8.742278e-08, 0.5, -0.8660254, 0, 0.75, 0.25)
 environment = SubResource("Environment_hqtel")
 current = true
 fov = 105.0

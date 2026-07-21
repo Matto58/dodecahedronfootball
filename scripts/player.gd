@@ -84,8 +84,8 @@ func _physics_process(delta: float) -> void:
 		if holdingBall and canHoldBall and stamina >= 0.01:
 			stamina = max(0, stamina - delta)
 			var newBallPos = Vector3(global_position)
-			newBallPos.x += cos(-global_rotation.y-HALF_PI)*2
-			newBallPos.z += sin(-global_rotation.y-HALF_PI)*2
+			newBallPos.x += cos(global_rotation.y-HALF_PI)*2
+			newBallPos.z += sin(global_rotation.y-HALF_PI)*2
 			setBallPos.emit(newBallPos, global_rotation)
 
 	move_and_slide()

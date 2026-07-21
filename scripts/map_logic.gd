@@ -8,6 +8,8 @@ var scoreYellow: int = 0
 var spawnedP: Array[Clanker] = []
 var spawnedY: Array[Clanker] = []
 
+const HOLD_BALL_CHECK_FREQUENCY = 18
+
 func resetBall():
 	$ball.linear_velocity = Vector3.ZERO
 	$ball.global_position = $"ball reset point".global_position
@@ -72,27 +74,38 @@ func _process(delta: float) -> void:
 		$player.paused = not $player.paused
 		$player/Console.visible = $player.paused
 
+# canHoldBall counter
+var chbCtr = 0
+
 func _physics_process(delta: float) -> void:
 	$player.sprinting = Input.is_action_pressed("sprint")
-	$player.input_dir = Input.get_axis("forward", "backward")
+	$player.input_dir = Input.get_axis("backward", "forward")
 	$player.yumping = Input.is_action_just_pressed("yump")
-	$player.lookAroundDir = -(Input.get_axis("leftalt", "rightalt") if Settoing.activeInstance.useAltPan else Input.get_axis("left", "right"))
+	$player.lookAroundDir = Input.get_axis("leftalt", "rightalt") if Settoing.activeInstance.useAltPan else Input.get_axis("left", "right")
 	$player.sensitivity = Settoing.activeInstance.rotMod
 	$player.holdingBall = Input.is_action_pressed("holding_ball")
-	# todo: make the check less often? .length() is really fucken expensive and doing it 240x/sec is no good for the cpu
-	$player.canHoldBall = ($player.global_position - $ball.global_position).length() < 3.0
 	$player/Camera3D.rotation.y = PI if Input.is_action_pressed("lookin_back") else 0.0
+
+	chbCtr += 1
 
 	for i in range(spawnedP.size()):
 		if spawnedP[i] == null:
 			spawnedP.pop_at(i)
 		else:
 			spawnedP[i].isOnOwnSide = spawnedP[i].global_position.x < 0
+			if chbCtr == HOLD_BALL_CHECK_FREQUENCY:
+				spawnedP[i].canHoldBall = (spawnedP[i].global_position - $ball.global_position).length() < 3.0
 	for i in range(spawnedY.size()):
 		if spawnedY[i] == null:
 			spawnedY.pop_at(i)
 		else:
 			spawnedY[i].isOnOwnSide = spawnedY[i].global_position.x < 0
+			if chbCtr == HOLD_BALL_CHECK_FREQUENCY:
+				spawnedY[i].canHoldBall = (spawnedY[i].global_position - $ball.global_position).length() < 3.0
+
+	if chbCtr == HOLD_BALL_CHECK_FREQUENCY:
+		chbCtr = 0
+		$player.canHoldBall = ($player.global_position - $ball.global_position).length() < 3.0
 
 func initBot(bot: Clanker):
 	bot.purpleGoal = $goalpurple

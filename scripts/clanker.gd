@@ -15,6 +15,7 @@ var isOnOwnSide: bool
 
 # values utilized to make the next step
 var currentTarget: AITargets = AITargets.None
+var heldBallAlready: bool = false
 
 func _ready() -> void:
 	print("%s (isYellow=%s)" % [nickname, isYellow])
@@ -33,7 +34,6 @@ func moveSelfTowards(target: Node3D) -> Vector2:
 		lookAroundDir = 1.0 if distanceToTarget2D.x > 0 else -1.0
 	else:
 		# todo: for hard difficulty, make ai be able to move backwards
-		# todo: also add looking backwards for the player
 		# for easy difficulty, the ai will have to make a full 180° turn before going towards the ball
 		lookAroundDir = 1.0
 	return distanceToTarget2D
@@ -53,6 +53,7 @@ func inputSim(delta: float) -> void:
 		lookAroundDir = 0.0
 		return
 
+
 	input_dir = 1.0
 	# todo: for hard difficulty, go to the middle where the ball should spawn if ball is below the map
 	match currentTarget:
@@ -67,10 +68,17 @@ func inputSim(delta: float) -> void:
 			yumping = true
 			# opp can be opponent or opposite. pick your poison
 			var distanceToOppGoal2D = moveSelfTowards(purpleGoal if isYellow else yellowGoal)
-			if calcDist2D(ballTarget).length() > 5:
+			var distanceToBall2D = calcDist2D(ballTarget).length()
+			if distanceToBall2D > 5:
 				newTarget(AITargets.SelfToBall)
 			if distanceToOppGoal2D.length() < 2.5:
 				newTarget(AITargets.SelfToOwnGoal if isOnOwnSide else AITargets.SelfToBall)
+			if not heldBallAlready and distanceToBall2D < 2.0:
+				holdingBall = true
+			if stamina < 0.75:
+				holdingBall = false
+				heldBallAlready = true
+			#$nametag.text = str(distanceToBall2D) + str(heldBallAlready) + str(holdingBall) + str(canHoldBall)
 		AITargets.SelfToOwnGoal:
 			var distanceToOwnGoal2D = moveSelfTowards(yellowGoal if isYellow else purpleGoal)
 			if distanceToOwnGoal2D.length() > 1 and isOnOwnSide:
