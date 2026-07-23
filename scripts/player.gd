@@ -10,8 +10,10 @@ signal getMovement()
 signal setBallPos(pos: Vector3, rot: Vector3)
 
 var sprinting: bool = false
+## -backward +forward
 var input_dir: float = 0.0
 var yumping: bool = false
+## -left +right
 var lookAroundDir: float = 0.0
 var paused: bool = false
 var sensitivity: float = 5.0
@@ -68,7 +70,7 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	var distance: Vector3 = global_position
-	var direction := (transform.basis * Vector3(0, 0, input_dir)).normalized()
+	var direction := (transform.basis * (Vector3.FORWARD * input_dir)).normalized()
 	if not paused:
 		if yumping and not prevYumping and is_on_floor():
 			velocity.y = JUMP_VELOCITY
@@ -79,13 +81,13 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED * sprintMod)
 			velocity.z = move_toward(velocity.z, 0, SPEED * sprintMod)
-		rotate_y(lookAroundDir * sensitivity)
+		rotate_y(-lookAroundDir * sensitivity)
 
 		if holdingBall and canHoldBall and stamina >= 0.01:
 			stamina = max(0, stamina - delta)
 			var newBallPos = Vector3(global_position)
-			newBallPos.x += cos(global_rotation.y-HALF_PI)*2
-			newBallPos.z += sin(global_rotation.y-HALF_PI)*2
+			newBallPos.x += cos(-global_rotation.y-HALF_PI)*2
+			newBallPos.z += sin(-global_rotation.y-HALF_PI)*2
 			setBallPos.emit(newBallPos, global_rotation)
 
 	move_and_slide()

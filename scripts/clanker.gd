@@ -31,7 +31,7 @@ func moveSelfTowards(target: Node3D) -> Vector2:
 	var distanceToTarget2D = calcDist2D(target)
 	if distanceToTarget2D.y > 0:
 		# todo: check if we're basically head-on with the target and don't rotate if we are
-		lookAroundDir = 1.0 if distanceToTarget2D.x > 0 else -1.0
+		lookAroundDir = 1.0 if distanceToTarget2D.x < 0 else -1.0
 	else:
 		# todo: for hard difficulty, make ai be able to move backwards
 		# for easy difficulty, the ai will have to make a full 180° turn before going towards the ball
@@ -39,7 +39,7 @@ func moveSelfTowards(target: Node3D) -> Vector2:
 	return distanceToTarget2D
 
 func calcDist3D(target: Node3D):
-	return target.global_position - global_position
+	return global_position - target.global_position
 
 func calcDist2DFrom3D(dist: Vector3):
 	return Vector2(dist.x, dist.z).rotated(global_rotation.y)
@@ -52,7 +52,6 @@ func inputSim(delta: float) -> void:
 		input_dir = 0.0
 		lookAroundDir = 0.0
 		return
-
 
 	input_dir = 1.0
 	# todo: for hard difficulty, go to the middle where the ball should spawn if ball is below the map
