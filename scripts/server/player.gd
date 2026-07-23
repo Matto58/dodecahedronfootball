@@ -7,6 +7,7 @@ class_name Player
 @export var nickname: String
 
 signal getMovement()
+#signal getCanHoldBall()
 signal setBallPos(pos: Vector3, rot: Vector3)
 
 var sprinting: bool = false
@@ -26,10 +27,6 @@ const STAMINA_LENGTH = 2
 const PURPLE_MATERIAL = preload("res://mats/goalourple.tres")
 const YELLOW_MATERIAL = preload("res://mats/goalyello.tres")
 const HALF_PI = PI / 2
-
-# local copies
-var scorePurple: int = 0
-var scoreYellow: int = 0
 
 var stamina: float = 1.0
 var sprintStarted: float
@@ -97,4 +94,5 @@ func _physics_process(delta: float) -> void:
 	if sprinting: stamina = max(0, stamina - delta*STAMINA_LENGTH*distance.length()) # scale stamina usage based on distance travelled
 	else: stamina = min(stamina + delta/STAMINA_LENGTH/2, 1)
 	prevYumping = yumping
+
 	#print(stamina)

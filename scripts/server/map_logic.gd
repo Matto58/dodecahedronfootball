@@ -1,8 +1,5 @@
 extends Map
 
-# todo: move the player related things to a different script and leave this script to be purely server-side
-#    ^^ also categorize all scripts (even everything in classes/) into server and client folders
-
 var scorePurple: int = 0
 var scoreYellow: int = 0
 var spawnedP: Array[Clanker] = []
@@ -14,21 +11,6 @@ func resetBall():
 	$ball.linear_velocity = Vector3.ZERO
 	$ball.global_position = $"ball reset point".global_position
 
-func updateScores():
-	$player/Camera3D/HUD/RichTextLabel2.text = "[b][color=\"#7f00ff\"]%d[/color][/b] : [b][color=\"#ff0\"]%d[/color][/b]" % [scorePurple, scoreYellow]
-
-func onGoal(yello: bool):
-	if yello: scorePurple += 1
-	else: scoreYellow += 1
-	$player/Camera3D/HUD/goallabel.label_settings.font_color = Color(1, 1, 0) if yello else Color(0.5, 0, 1)
-	$player/Camera3D/HUD/AnimationPlayer.play("goal")
-	updateScores()
-
-func timeToStr(seconds: float):
-	var minutes = int(seconds/60)
-	var secondsComponent = int(seconds - minutes*60)
-	return str(minutes) + ":" + str(secondsComponent).pad_zeros(2)
-
 func playerSetBallPos(pos: Vector3, rot: Vector3):
 	$ball.global_position = pos
 	$ball.global_rotation = rot
@@ -36,22 +18,17 @@ func playerSetBallPos(pos: Vector3, rot: Vector3):
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	resetBall()
-	updateScores()
-	$goalpurple.onGoalScore.connect(onGoal)
-	$goalyellow.onGoalScore.connect(onGoal)
-	$player.nickname = Settoing.activeInstance.nickname
-	$player.isYellow = mainPlayerIsYellow
-	$player.initPlayerNickInHUD()
-	$player.createNametag()
-	$player/Console.map = self
-	$player/Camera3D/HUD/mapprops/author.text = "by " + author
-	$player/Camera3D/HUD/mapprops/name.text = title
+	# todo: every piece of logic that mentions $PlayerManager.player should be moved into the player manager itself
+	#       and the player manager should be in the clientside instance of the map
+	#       the player needn't the full instance of the map, only the players, map objects and score
 	$"oob detector".body_entered.connect(func(body):
 		if body == $ball: resetBall()
-		elif body == $player: $player.global_position = $"ball reset point".global_position # todo: create a player reset point
+		elif body == $PlayerManager.player: $PlayerManager.player.global_position = $"ball reset point".global_position # todo: create a player reset point
 		else: print("can't handle ", body, " going out of bounds")
 		#print("fuck")
 	)
+	$PlayerManager.mapInfo = self
+	$PlayerManager.initMapStuff()
 
 	print("spawning %d purple and %d yellow bots" % [purpleBots, yellowBots])
 	spawnedP = $"clanker spawner".spawn(purpleBots, false)
@@ -63,29 +40,13 @@ func _ready() -> void:
 		initBot(yBot)
 		yBot.setBallPos.connect(playerSetBallPos)
 
-	$player.setBallPos.connect(playerSetBallPos)
-
 	roundTimer.start()
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	$player/Camera3D/HUD/timerlabel.text = timeToStr(roundTimer.time_left)
-	if Input.is_action_just_pressed("pause"):
-		$player.paused = not $player.paused
-		$player/Console.visible = $player.paused
 
 # canHoldBall counter
 var chbCtr = 0
 
 func _physics_process(delta: float) -> void:
-	$player.sprinting = Input.is_action_pressed("sprint")
-	$player.input_dir = Input.get_axis("backward", "forward")
-	$player.yumping = Input.is_action_just_pressed("yump")
-	$player.lookAroundDir = Input.get_axis("leftalt", "rightalt") if Settoing.activeInstance.useAltPan else Input.get_axis("left", "right")
-	$player.sensitivity = Settoing.activeInstance.rotMod
-	$player.holdingBall = Input.is_action_pressed("holding_ball")
-	$player/Camera3D.rotation.y = PI if Input.is_action_pressed("lookin_back") else 0.0
-
+	# todo: link the canHoldBall check to a player signal
 	chbCtr += 1
 
 	for i in range(spawnedP.size()):
@@ -100,12 +61,10 @@ func _physics_process(delta: float) -> void:
 			spawnedY.pop_at(i)
 		else:
 			spawnedY[i].isOnOwnSide = spawnedY[i].global_position.x < 0
-			if chbCtr == HOLD_BALL_CHECK_FREQUENCY:
-				spawnedY[i].canHoldBall = (spawnedY[i].global_position - $ball.global_position).length() < 3.0
 
 	if chbCtr == HOLD_BALL_CHECK_FREQUENCY:
 		chbCtr = 0
-		$player.canHoldBall = ($player.global_position - $ball.global_position).length() < 3.0
+		$PlayerManager.player.canHoldBall = ($PlayerManager.player.global_position - $ball.global_position).length() < 3.0
 
 func initBot(bot: Clanker):
 	bot.purpleGoal = $goalpurple

@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bmdywebyaq56k" path="res://scenes/ball.tscn" id="1_julm7"]
 [ext_resource type="PackedScene" uid="uid://bmlg7d06rvekb" path="res://scenes/player.tscn" id="2_ys0t5"]
 [ext_resource type="PackedScene" uid="uid://bs5lkulr3ejkl" path="res://scenes/clanker_spawner.tscn" id="3_8vdae"]
+[ext_resource type="Script" uid="uid://bkix48au43eva" path="res://scripts/client/player_mgr.gd" id="3_u2l6s"]
 [ext_resource type="PackedScene" uid="uid://ba33y32xlma6q" path="res://scenes/goal.tscn" id="5_7jtoi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ys0t5"]
@@ -41,7 +42,12 @@ mass = 0.2
 [node name="ball reset point" type="Node3D" parent="." unique_id=60646456]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
-[node name="player" parent="." unique_id=1311159354 instance=ExtResource("2_ys0t5")]
+[node name="PlayerManager" type="Node3D" parent="." unique_id=7285542 node_paths=PackedStringArray("player")]
+script = ExtResource("3_u2l6s")
+player = NodePath("player")
+metadata/_custom_type_script = "uid://bkix48au43eva"
+
+[node name="player" parent="PlayerManager" unique_id=1311159354 instance=ExtResource("2_ys0t5")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8, 2.5, 0)
 
 [node name="clanker spawner" parent="." unique_id=1932460306 instance=ExtResource("3_8vdae")]
