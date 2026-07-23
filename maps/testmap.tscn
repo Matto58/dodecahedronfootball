@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cj8ui21t2vl73"]
 
-[ext_resource type="Script" uid="uid://c15203hxuye1w" path="res://scripts/map_logic.gd" id="1_6seei"]
+[ext_resource type="Script" uid="uid://c15203hxuye1w" path="res://scripts/server/map_logic.gd" id="1_6seei"]
 [ext_resource type="PackedScene" uid="uid://bmdywebyaq56k" path="res://scenes/ball.tscn" id="1_julm7"]
 [ext_resource type="PackedScene" uid="uid://bmlg7d06rvekb" path="res://scenes/player.tscn" id="2_ys0t5"]
 [ext_resource type="PackedScene" uid="uid://bs5lkulr3ejkl" path="res://scenes/clanker_spawner.tscn" id="3_8vdae"]

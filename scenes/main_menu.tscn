@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://brcel7uf8ip6s"]
 
-[ext_resource type="Script" uid="uid://gm1na5yeqcar" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Script" uid="uid://gm1na5yeqcar" path="res://scripts/client/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="PackedScene" uid="uid://6r4odniqxedc" path="res://scenes/settings_menu.tscn" id="2_ekxnf"]
-[ext_resource type="Script" uid="uid://lllepfb0mbng" path="res://scripts/music_mgr.gd" id="3_bqqt6"]
+[ext_resource type="Script" uid="uid://lllepfb0mbng" path="res://scripts/client/music_mgr.gd" id="3_bqqt6"]
 
 [sub_resource type="SystemFont" id="SystemFont_vue75"]
 font_names = PackedStringArray("Arial")

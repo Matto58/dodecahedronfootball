@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://baw5ra54cx6v0"]
 
-[ext_resource type="Script" uid="uid://b32g2vgorcr2r" path="res://scripts/console.gd" id="1_gf67r"]
+[ext_resource type="Script" uid="uid://b32g2vgorcr2r" path="res://scripts/server/console.gd" id="1_gf67r"]
 
 [node name="Console" type="Window" unique_id=1667808087]
 oversampling_override = 1.0

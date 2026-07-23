@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c38ychbenp81w"]
 
-[ext_resource type="Script" uid="uid://c15203hxuye1w" path="res://scripts/map_logic.gd" id="1_ffa5k"]
+[ext_resource type="Script" uid="uid://c15203hxuye1w" path="res://scripts/server/map_logic.gd" id="1_ffa5k"]
 [ext_resource type="PackedScene" uid="uid://ba33y32xlma6q" path="res://scenes/goal.tscn" id="2_au84u"]
 [ext_resource type="PackedScene" uid="uid://bmdywebyaq56k" path="res://scenes/ball.tscn" id="2_fki5b"]
 [ext_resource type="PackedScene" uid="uid://bmlg7d06rvekb" path="res://scenes/player.tscn" id="3_fki5b"]

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://6r4odniqxedc"]
 
-[ext_resource type="Script" uid="uid://dhb6qy4m5p3pk" path="res://scripts/settings_menu.gd" id="1_n5haf"]
+[ext_resource type="Script" uid="uid://dhb6qy4m5p3pk" path="res://scripts/client/settings_menu.gd" id="1_n5haf"]
 
 [sub_resource type="SystemFont" id="SystemFont_l6cm7"]
 font_names = PackedStringArray("Arial")
