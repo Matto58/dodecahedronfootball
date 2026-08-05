@@ -34,7 +34,7 @@ func playerSetBallPos(pos: Vector3, rot: Vector3):
 
 func generateInfo() -> MapInfo:
 	var i = MapInfo.new()
-	i.serverVersion = Settoing.GAME_VER
+	i.serverVersion = DHMain.GAME_VER
 	i.name = title
 	i.author = author
 	i.roundTimer = roundTimer

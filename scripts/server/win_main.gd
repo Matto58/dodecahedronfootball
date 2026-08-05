@@ -7,6 +7,7 @@ func _exit_tree() -> void:
 	$Console.net.shutDown()
 
 func _ready() -> void:
+	get_window().title = "Dodecahedron Football Server [v" + DHMain.GAME_VER + "]"
 	$Console/VBoxContainer/conprompt.editable = false
 	$FileDialog.show()
 

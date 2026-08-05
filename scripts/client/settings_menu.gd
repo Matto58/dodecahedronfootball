@@ -9,7 +9,7 @@ func _ready() -> void:
 		%mainmenutrack.add_item(t.title + " by " + t.artist)
 		mainMenuTrackCopyrightNotice += "\n- %s by %s is under the %s license - [url=\"%s\"]get this track[/url] - [url=\"%s\"]visit the artist's website[/url]" % [t.title, t.artist, t.license, t.trackURL, t.artistURL]
 	%abouttext.text %= mainMenuTrackCopyrightNotice
-	%versionlabel.text = "Dodecahedron Football - Version " + Settoing.GAME_VER + " - Demo " + str(Settoing.GAME_DEMO_NUM)
+	%versionlabel.text = "Dodecahedron Football - Version " + DHMain.GAME_VER + " - Demo " + str(DHMain.GAME_DEMO_NUM)
 	resetSettings()
 
 func resetSettings():
