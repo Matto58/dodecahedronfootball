@@ -40,7 +40,7 @@ func _ready() -> void:
 		playerObj.i = p
 		add_child(playerObj)
 		otherPlayers.append(playerObj)
-	print("- reconstructing objects (%d)" % mapInfo.mapObjs.get_child_count())
+	print("- reconstructing objects")
 	add_child(mapInfo.mapObjs)
 	print("ready!")
 

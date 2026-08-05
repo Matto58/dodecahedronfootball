@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Dodecahedron Football"
-run/main_scene="uid://brcel7uf8ip6s"
+run/main_scene="uid://bkxa24ms01g6o"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
