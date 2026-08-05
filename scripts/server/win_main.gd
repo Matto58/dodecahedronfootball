@@ -1,11 +1,24 @@
 extends Control
 
-var con: Window
+var map: Map
 
-# Called when the node enters the scene tree for the first time.
+func _exit_tree() -> void:
+	if $Console.net == null: return
+	$Console.net.shutDown()
+
 func _ready() -> void:
-	pass # Replace with function body.
+	$Console/VBoxContainer/conprompt.editable = false
+	$FileDialog.show()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _on_file_dialog_file_selected(path: String) -> void:
+	print("loading map " + path)
+	var mapScn: PackedScene = load(path)
+	map = mapScn.instantiate()
+	print("loaded. initializing")
+	add_child(map)
+	$Console.net = map.net
+	print("initialized. ready for players")
+	$Console/VBoxContainer/conprompt.editable = true
+
+func _on_file_dialog_canceled() -> void:
+	get_tree().quit(1)

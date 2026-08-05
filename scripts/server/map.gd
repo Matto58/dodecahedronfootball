@@ -81,11 +81,16 @@ func countTeamMembers() -> Vector2i:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	net = NetInterface.new()
-	net.initServer()
+	if net == null:
+		net = NetInterface.new()
+		add_child(net)
+		net.initServer()
+	if console == null:
+		console = Console.new()
 	resetBall()
 	net.map = self
 	botSpawner.m = self
+	console.map = self
 	# todo: every piece of logic that mentions $PlayerManager.player should be moved into the player manager itself
 	#       and the player manager should be in the clientside instance of the map
 	#       the player needn't the full instance of the map, only the players, map objects and score

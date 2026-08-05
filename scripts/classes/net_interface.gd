@@ -16,8 +16,9 @@ const DEFAULT_SERVER_PORT = 6200
 func initServer(port: int = DEFAULT_SERVER_PORT) -> bool:
 	print("initServer: creating server")
 	peer = ENetMultiplayerPeer.new()
-	if peer.create_server(port) == ERR_CANT_CREATE:
-		printerr("initServer: could not create server")
+	var result = peer.create_server(port)
+	if result != OK:
+		printerr("initServer: could not create server: %s" % result)
 		return false
 	multiplayer.multiplayer_peer = peer
 	print("initServer: ready. please initialize the map")
@@ -26,8 +27,9 @@ func initServer(port: int = DEFAULT_SERVER_PORT) -> bool:
 func initClient(port: int = DEFAULT_SERVER_PORT, ip: String = "127.0.0.1") -> bool:
 	print("initClient: creating client")
 	peer = ENetMultiplayerPeer.new()
-	if peer.create_client(ip, port) == ERR_CANT_CREATE:
-		printerr("initClient: could not create client")
+	var result = peer.create_client(ip, port)
+	if result != OK:
+		printerr("initServer: could not create server: %s" % result)
 		return false
 	multiplayer.multiplayer_peer = peer
 	print("initClient: ready. please initialize the player manager")
@@ -88,6 +90,9 @@ func cGetMapInfo() -> MapInfo:
 	return map.generateInfo()
 @rpc("any_peer", "call_remote")
 func cTryConsoleCmd(cmd: String) -> bool:
+	if multiplayer.is_server():
+		runCmd(cmd)
+		return true
 	return false
 
 @rpc("any_peer", "call_local")

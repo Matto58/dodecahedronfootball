@@ -13,3 +13,11 @@ grow_vertical = 2
 script = ExtResource("1_rcx6v")
 
 [node name="Console" parent="." unique_id=1667808087 instance=ExtResource("1_ih8cl")]
+
+[node name="FileDialog" type="FileDialog" parent="." unique_id=111823314]
+title = "Open a File"
+file_mode = 0
+filters = PackedStringArray("*.tscn", "*.scn")
+
+[connection signal="canceled" from="FileDialog" to="." method="_on_file_dialog_canceled"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

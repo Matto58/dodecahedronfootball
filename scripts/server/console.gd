@@ -54,10 +54,6 @@ var commandsHelp: Dictionary[String, String] = {
 }
 
 func runCmd(cmd: String):
-	%conlog.push_paragraph(HORIZONTAL_ALIGNMENT_LEFT)
-	%conlog.add_text("> " + cmd)
-	%conlog.pop()
-
 	var ln = cmd.split(" ")
 	if ln.size() < 0: return
 	if ln[0] == "help":
@@ -77,8 +73,3 @@ func runCmd(cmd: String):
 		return
 	var actualCmd = category.get(ln[1])
 	actualCmd.call(ln)
-
-func _ready() -> void:
-	var l = ConsoleLogger.new()
-	l.uiLog = %conlog
-	OS.add_logger(l)
