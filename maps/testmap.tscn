@@ -37,6 +37,8 @@ mapObjs = NodePath("map objects")
 oobArea = NodePath("oob detector")
 ball = NodePath("ball")
 ballResetPoint = Vector3(0, 3, 0)
+spawnpointsPurple = Array[Vector4]([Vector4(-12, 2.5, -5, -90), Vector4(-11, 2.5, -2.5, -90), Vector4(-10, 2.5, 0, -90), Vector4(-11, 2.5, 2.5, -90), Vector4(-12, 2.5, 5, -90)])
+spawnpointsYellow = Array[Vector4]([Vector4(12, 2.5, -5, 90), Vector4(11, 2.5, -2.5, 90), Vector4(10, 2.5, 0, 90), Vector4(11, 2.5, 2.5, 90), Vector4(12, 2.5, 5, 90)])
 botSpawner = NodePath("clanker spawner")
 metadata/_custom_type_script = "uid://b5se86qylwv8l"
 

@@ -13,6 +13,8 @@ class_name Map
 @export var oobArea: Area3D
 @export var ball: RigidBody3D
 @export var ballResetPoint: Vector3
+@export var spawnpointsPurple: Array[Vector4]
+@export var spawnpointsYellow: Array[Vector4]
 @export var botSpawner: ClankerSpawner
 
 var scorePurple: int = 0
@@ -44,17 +46,14 @@ func generateInfo() -> MapInfo:
 	i.currentYScore = scoreYellow
 	return i
 
-func handleJoin(player: PlayerInfo, local: bool = false) -> PlayerInfo:
-	assert(not local, "not implemented")
-	# todo: deprecate
+func handleJoin(player: PlayerInfo) -> PlayerInfo:
 	# todo: split scenes into server/client
-	var p: Player = preload("res://scenes/player.tscn") if local else Player.new()
+	var p: Player = Player.new()
 	p.i = player
 	add_child(p)
 	players[player.netID] = p
 
-	# move the spawnpoints into the map data
-	var spawnpoints: Array[Vector4] = botSpawner.spawnpointsYellow if player.isYellow else botSpawner.spawnpointsPurple
+	var spawnpoints: Array[Vector4] = spawnpointsYellow if player.isYellow else spawnpointsPurple
 	var spawnpoint4 = spawnpoints.pick_random()
 	p.global_position = Vector3(spawnpoint4.x, spawnpoint4.y, spawnpoint4.z)
 	p.global_rotation = Vector3(0.0, spawnpoint4.w, 0.0)
