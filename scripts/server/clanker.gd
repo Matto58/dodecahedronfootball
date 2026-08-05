@@ -18,12 +18,12 @@ var currentTarget: AITargets = AITargets.None
 var heldBallAlready: bool = false
 
 func _ready() -> void:
-	print("%s (isYellow=%s)" % [nickname, isYellow])
+	#print("%s (isYellow=%s)" % [nickname, isYellow])
 	getMovement.connect(inputSim)
-	$MeshInstance3D.mesh.surface_set_material(0, YELLOW_MATERIAL if isYellow else PURPLE_MATERIAL)
+	$MeshInstance3D.mesh.surface_set_material(0, YELLOW_MATERIAL if i.isYellow else PURPLE_MATERIAL)
 
 func newTarget(t: AITargets):
-	print("%s is changing targets from %s to %s" % [nickname, AITargets.keys()[currentTarget], AITargets.keys()[t]])
+	print("%s is changing targets from %s to %s" % [i.nickname, AITargets.keys()[currentTarget], AITargets.keys()[t]])
 	currentTarget = t
 
 # returns distance towards target
@@ -31,11 +31,11 @@ func moveSelfTowards(target: Node3D) -> Vector2:
 	var distanceToTarget2D = calcDist2D(target)
 	if distanceToTarget2D.y > 0:
 		# todo: check if we're basically head-on with the target and don't rotate if we are
-		lookAroundDir = 1.0 if distanceToTarget2D.x < 0 else -1.0
+		inp.lookAroundDir = 1.0 if distanceToTarget2D.x < 0 else -1.0
 	else:
 		# todo: for hard difficulty, make ai be able to move backwards
 		# for easy difficulty, the ai will have to make a full 180° turn before going towards the ball
-		lookAroundDir = 1.0
+		inp.lookAroundDir = 1.0
 	return distanceToTarget2D
 
 func calcDist3D(target: Node3D):
@@ -48,37 +48,37 @@ func calcDist2D(target: Node3D):
 	return calcDist2DFrom3D(calcDist3D(target))
 
 func inputSim(delta: float) -> void:
-	if paused:
-		input_dir = 0.0
-		lookAroundDir = 0.0
+	if inp.paused:
+		inp.input_dir = 0.0
+		inp.lookAroundDir = 0.0
 		return
 
-	input_dir = 1.0
+	inp.input_dir = 1.0
 	# todo: for hard difficulty, go to the middle where the ball should spawn if ball is below the map
 	match currentTarget:
 		AITargets.None:
-			input_dir = 0.0
-			lookAroundDir = 0.0
+			inp.input_dir = 0.0
+			inp.lookAroundDir = 0.0
 		AITargets.SelfToBall:
 			var distanceToBall2D = moveSelfTowards(ballTarget)
 			if distanceToBall2D.length() < 1.5:
 				newTarget(AITargets.BallToOppositeGoal)
 		AITargets.BallToOppositeGoal:
-			yumping = true
+			inp.yumping = true
 			# opp can be opponent or opposite. pick your poison
-			var distanceToOppGoal2D = moveSelfTowards(purpleGoal if isYellow else yellowGoal)
+			var distanceToOppGoal2D = moveSelfTowards(purpleGoal if i.isYellow else yellowGoal)
 			var distanceToBall2D = calcDist2D(ballTarget).length()
 			if distanceToBall2D > 5:
 				newTarget(AITargets.SelfToBall)
 			if distanceToOppGoal2D.length() < 2.5:
 				newTarget(AITargets.SelfToOwnGoal if isOnOwnSide else AITargets.SelfToBall)
 			if not heldBallAlready and distanceToBall2D < 2.0:
-				holdingBall = true
+				inp.holdingBall = true
 			if stamina < 0.75:
-				holdingBall = false
+				inp.holdingBall = false
 				heldBallAlready = true
 			#$nametag.text = str(distanceToBall2D) + str(heldBallAlready) + str(holdingBall) + str(canHoldBall)
 		AITargets.SelfToOwnGoal:
-			var distanceToOwnGoal2D = moveSelfTowards(yellowGoal if isYellow else purpleGoal)
+			var distanceToOwnGoal2D = moveSelfTowards(yellowGoal if i.isYellow else purpleGoal)
 			if distanceToOwnGoal2D.length() > 1 and isOnOwnSide:
 				newTarget(AITargets.SelfToBall)

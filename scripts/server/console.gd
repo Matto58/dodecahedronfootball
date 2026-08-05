@@ -1,4 +1,6 @@
-extends Window
+extends Node
+
+class_name Console
 
 var map: Map
 
@@ -98,11 +100,3 @@ func _ready() -> void:
 	var l = ConsoleLogger.new()
 	l.uiLog = %conlog
 	OS.add_logger(l)
-
-func _on_close_requested() -> void:
-	hide()
-
-func _on_conprompt_text_submitted(new_text: String) -> void:
-	%conprompt.text = ""
-	runCmd(new_text)
-	%conprompt.grab_focus()

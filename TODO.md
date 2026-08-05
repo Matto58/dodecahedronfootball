@@ -15,7 +15,7 @@ Goals for Demo 3:
 - [ ] Bots to play against
 	- [x] Easy difficulty
 	- [ ] Hard difficulty
-- [ ] Local multiplayer:
+- [x] Local multiplayer:
 	- [x] Color players appropriately
 	- [x] Name tags + name customization in settings
 - [x] Support for loading maps from a file

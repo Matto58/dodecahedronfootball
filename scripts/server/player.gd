@@ -2,24 +2,12 @@ extends CharacterBody3D
 
 class_name Player
 
-@export_group("Configurable values")
-@export var isYellow: bool = false
-@export var nickname: String
-
 signal getMovement()
 #signal getCanHoldBall()
 signal setBallPos(pos: Vector3, rot: Vector3)
 
-var sprinting: bool = false
-## -backward +forward
-var input_dir: float = 0.0
-var yumping: bool = false
-## -left +right
-var lookAroundDir: float = 0.0
-var paused: bool = false
-var sensitivity: float = 5.0
-var holdingBall: bool = false
-var canHoldBall: bool = false
+var i: PlayerInfo
+var inp: PlayerInputs
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4
@@ -31,45 +19,26 @@ const HALF_PI = PI / 2
 var stamina: float = 1.0
 var sprintStarted: float
 var prevYumping: bool = false
-
-func _ready() -> void:
-	$MeshInstance3D.mesh.surface_set_material(0, YELLOW_MATERIAL if isYellow else PURPLE_MATERIAL)
-
-func initPlayerNickInHUD():
-	$Camera3D/HUD/RichTextLabel.append_text("[color=\"#999\"]Playing as[/color] [b][color=\"#%s\"]%s[/color][/b]" % ["ff0" if isYellow else "7f00ff", nickname])
-
-func createNametag():
-	var tag = Label3D.new()
-	add_child(tag)
-	tag.position = Vector3(0, 1.25, 0)
-	tag.name = "nametag"
-	tag.text = nickname
-	tag.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	tag.font_size = 64
-
-func _process(delta: float) -> void:
-	if not has_node("Camera3D"): return
-	$Camera3D/HUD/staminabar.size.x = $Camera3D/HUD/ColorRect2.size.x * stamina
-	$Camera3D/pause_menu.visible = paused
+var canHoldBall: bool = false
 
 func _physics_process(delta: float) -> void:
 	getMovement.emit(delta)
 
-	input_dir = minf(1.0, input_dir)
-	input_dir = maxf(-1.0, input_dir)
-	lookAroundDir = minf(1.0, lookAroundDir)
-	lookAroundDir = maxf(-1.0, lookAroundDir)
-	sensitivity = minf(0.15, sensitivity)
-	sensitivity = maxf(0.005, sensitivity)
+	inp.input_dir = minf(1.0, inp.input_dir)
+	inp.input_dir = maxf(-1.0, inp.input_dir)
+	inp.lookAroundDir = minf(1.0, inp.lookAroundDir)
+	inp.lookAroundDir = maxf(-1.0, inp.lookAroundDir)
+	inp.sensitivity = minf(0.15, inp.sensitivity)
+	inp.sensitivity = maxf(0.005, inp.sensitivity)
 
-	var sprintMod: float = 1.75 if stamina >= 0.01 and sprinting else 1.0
+	var sprintMod: float = 1.75 if stamina >= 0.01 and inp.sprinting else 1.0
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
 	var distance: Vector3 = global_position
-	var direction := (transform.basis * (Vector3.FORWARD * input_dir)).normalized()
-	if not paused:
-		if yumping and not prevYumping and is_on_floor():
+	var direction := (transform.basis * (Vector3.FORWARD * inp.input_dir)).normalized()
+	if not inp.paused:
+		if inp.yumping and not prevYumping and is_on_floor():
 			velocity.y = JUMP_VELOCITY
 
 		if direction:
@@ -78,9 +47,9 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED * sprintMod)
 			velocity.z = move_toward(velocity.z, 0, SPEED * sprintMod)
-		rotate_y(-lookAroundDir * sensitivity)
+		rotate_y(-inp.lookAroundDir * inp.sensitivity)
 
-		if holdingBall and canHoldBall and stamina >= 0.01:
+		if inp.holdingBall and canHoldBall and stamina >= 0.01:
 			stamina = max(0, stamina - delta)
 			var newBallPos = Vector3(global_position)
 			newBallPos.x += cos(-global_rotation.y-HALF_PI)*2
@@ -91,8 +60,10 @@ func _physics_process(delta: float) -> void:
 
 	distance -= global_position
 
-	if sprinting: stamina = max(0, stamina - delta*STAMINA_LENGTH*distance.length()) # scale stamina usage based on distance travelled
+	if inp.sprinting: stamina = max(0, stamina - delta*STAMINA_LENGTH*distance.length()) # scale stamina usage based on distance travelled
 	else: stamina = min(stamina + delta/STAMINA_LENGTH/2, 1)
-	prevYumping = yumping
+	prevYumping = inp.yumping
 
+	i.position = global_position
+	i.rotation = global_rotation
 	#print(stamina)

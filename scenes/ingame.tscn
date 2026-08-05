@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dvtvabxj0mdo2"]
+
+[ext_resource type="Script" uid="uid://bvin2ksxqimag" path="res://scripts/client/map_interpreter.gd" id="1_y7rqt"]
+
+[node name="Ingame" type="Node3D" unique_id=1579765938]
+script = ExtResource("1_y7rqt")

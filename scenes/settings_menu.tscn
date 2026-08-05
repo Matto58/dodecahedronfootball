@@ -168,7 +168,7 @@ label_settings = SubResource("LabelSettings_8ln24")
 unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
-text = "Dodecahedron Football is a for-now singleplayer game that's played like football, but with a dodecahedron. It is being developed by ilo Kiso (@kittheconfusedcyborg on Tumblr and Discord).
+text = "Dodecahedron Football is a multiplayer game that's played like football, but with a dodecahedron. It is being developed by ilo Kiso (@kittheconfusedcyborg on Tumblr and Discord).
 It is licensed under the LGPL-3.0 license, except for its music, more on that below. Its text should be included along with the game in a file called LICENSE.txt. If it isn't, you can locate its contents online [url href=\"https://raw.githubusercontent.com/spdx/license-list-data/e6ccb09/text/LGPL-3.0-or-later.txt\"]here[/url].
 All primitive shapes are in the public domain, but the models that aren't primitive shapes are:
 - Goal - modeled by me - I hereby release it into the public domain

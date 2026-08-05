@@ -2,9 +2,7 @@ extends Node3D
 
 class_name ClankerSpawner
 
-# xyz is position, w is y rotation in degrees
-@export var spawnpointsPurple: Array[Vector4]
-@export var spawnpointsYellow: Array[Vector4]
+var m: Map
 
 # tf2 style
 # todo: come up with more that aren't as corny
@@ -17,6 +15,13 @@ static var botNames: Array[String] = [
 	"No Foot Only Ballin'", # i'm gonna fucking explode what did i write
 	"010001110110000101111001", # me
 	"crouton.net",
+	"tenor.com gif picker",
+	"Han-Tyumi", # king gizzard
+	"Gilgamesh", # giiiiiiiilgamesh
+	"Maurice", # also ultakil
+	"Gila Monster", # watch me. i can do multiple king gizzard references
+	"Dragon", # because they also like perfectly normal and fuckin' badass names
+	"N.G.R.I.", # ...okay maybe not that one but sure
 ]
 
 ## creates `count` bots, assigns them all the username specified and moves them to their respective team's spawnpoints, while also making them children of this node
@@ -24,10 +29,10 @@ static var botNames: Array[String] = [
 ## returns the array of spawned bots if successfully spawned, otherwise an empty array if something went wrong
 ## spawned bots will by default have no valid target nodes and their AITargets will be None. it is the job of the script calling this function to assign the targets 
 func spawn(count: int, onYellowSide: bool, nickname: String = "", easyDiff: bool = true) -> Array[Clanker]:
-	if spawnpointsPurple == null or spawnpointsYellow == null:
+	if m.spawnpointsPurple == null or m.spawnpointsYellow == null:
 		printerr("cannot spawn bots: neither team's spawnpoints are valid")
 		return []
-	var spawnpoints: Array[Vector4] = (spawnpointsYellow if onYellowSide else spawnpointsPurple).duplicate()
+	var spawnpoints: Array[Vector4] = (m.spawnpointsYellow if onYellowSide else m.spawnpointsPurple).duplicate()
 	if count > spawnpoints.size():
 		printerr("cannot spawn bots: tried to spawn %d bots on a map with %d spawnpoints for the %s side" % [count, spawnpoints.size(), "yellow" if onYellowSide else "purple"])
 		return []
@@ -38,16 +43,7 @@ func spawn(count: int, onYellowSide: bool, nickname: String = "", easyDiff: bool
 	var spawnedBots: Array[Clanker] = []
 	for i in range(count):
 		var bot = createBot(onYellowSide, easyDiff)
-		if not nickname.is_empty(): bot.nickname = nickname
-		bot.name = "AI '%s'" % bot.nickname
-
-		var ogName = bot.nickname
-		var dupNum = 1
-		while has_node(NodePath(bot.name)):
-			print("bot named '%s' already exists, giving duplicate name" % bot.nickname)
-			bot.nickname = "%s (%d)" % [ogName, dupNum]
-			bot.name = "AI '%s'" % bot.nickname
-			dupNum += 1
+		if not nickname.is_empty(): bot.nickname = m.getUniqueNick(nickname)
 
 		add_child(bot)
 		spawnedBots.append(bot)

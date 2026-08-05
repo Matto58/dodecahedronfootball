@@ -1,41 +1,11 @@
 [gd_scene format=3 uid="uid://bmlg7d06rvekb"]
 
-[ext_resource type="Script" uid="uid://ctvrdn4fpbrqv" path="res://scripts/server/player.gd" id="1_4flbx"]
-[ext_resource type="PackedScene" uid="uid://baw5ra54cx6v0" path="res://scenes/console.tscn" id="2_fjrip"]
-[ext_resource type="Material" uid="uid://deq4jfd6yctbe" path="res://misc/skybox.tres" id="2_onrkg"]
-[ext_resource type="PackedScene" uid="uid://6glcw70ftxdt" path="res://scenes/hud.tscn" id="3_qhqgy"]
-[ext_resource type="PackedScene" uid="uid://du5ra3k5noqb7" path="res://scenes/pause_menu.tscn" id="4_dqkch"]
-[ext_resource type="Shape3D" uid="uid://cpogngobq8wop" path="res://misc/player_collision.tres" id="4_smehm"]
+[ext_resource type="Script" uid="uid://c7rmxv738c526" path="res://scripts/client/player_local.gd" id="1_fjrip"]
 [ext_resource type="CapsuleMesh" uid="uid://rtu6piay3eh2" path="res://misc/player_mesh.tres" id="5_ur7pv"]
 
-[sub_resource type="Sky" id="Sky_i3pqv"]
-sky_material = ExtResource("2_onrkg")
-
-[sub_resource type="Environment" id="Environment_hqtel"]
-background_mode = 2
-sky = SubResource("Sky_i3pqv")
-
-[node name="player" type="CharacterBody3D" unique_id=1748714981]
+[node name="player" type="Node3D" unique_id=1388979494]
 transform = Transform3D(0.9999996, 0, 0, 0, 1, 0, 0, 0, 0.9999996, 0, 0, 0)
-script = ExtResource("1_4flbx")
-metadata/_custom_type_script = "uid://ctvrdn4fpbrqv"
-
-[node name="Console" parent="." unique_id=1667808087 instance=ExtResource("2_fjrip")]
-visible = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=455418228]
-shape = ExtResource("4_smehm")
+script = ExtResource("1_fjrip")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2081410353]
 mesh = ExtResource("5_ur7pv")
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=796718161]
-transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0.75, -0.25)
-environment = SubResource("Environment_hqtel")
-current = true
-fov = 105.0
-
-[node name="HUD" parent="Camera3D" unique_id=1034299798 instance=ExtResource("3_qhqgy")]
-
-[node name="pause_menu" parent="Camera3D" unique_id=1287367898 instance=ExtResource("4_dqkch")]
-visible = false

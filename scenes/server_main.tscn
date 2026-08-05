@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://d0hsf65m22vb6"]
+
+[ext_resource type="PackedScene" uid="uid://baw5ra54cx6v0" path="res://scenes/console.tscn" id="1_ih8cl"]
+[ext_resource type="Script" uid="uid://djb7s8ax38lqs" path="res://scripts/server/win_main.gd" id="1_rcx6v"]
+
+[node name="ServerMain" type="Control" unique_id=977281812]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rcx6v")
+
+[node name="Console" parent="." unique_id=1667808087 instance=ExtResource("1_ih8cl")]

@@ -1,10 +1,8 @@
 [gd_scene format=3 uid="uid://cj8ui21t2vl73"]
 
-[ext_resource type="Script" uid="uid://c15203hxuye1w" path="res://scripts/server/map_logic.gd" id="1_6seei"]
+[ext_resource type="Script" uid="uid://b5se86qylwv8l" path="res://scripts/server/map.gd" id="1_7jtoi"]
 [ext_resource type="PackedScene" uid="uid://bmdywebyaq56k" path="res://scenes/ball.tscn" id="1_julm7"]
-[ext_resource type="PackedScene" uid="uid://bmlg7d06rvekb" path="res://scenes/player.tscn" id="2_ys0t5"]
 [ext_resource type="PackedScene" uid="uid://bs5lkulr3ejkl" path="res://scenes/clanker_spawner.tscn" id="3_8vdae"]
-[ext_resource type="Script" uid="uid://bkix48au43eva" path="res://scripts/client/player_mgr.gd" id="3_u2l6s"]
 [ext_resource type="PackedScene" uid="uid://ba33y32xlma6q" path="res://scenes/goal.tscn" id="5_7jtoi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ys0t5"]
@@ -28,92 +26,88 @@ size = Vector3(50, 2.5, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_8vdae"]
 size = Vector3(250, 1, 250)
 
-[node name="Node3D" type="Node3D" unique_id=1450625905 node_paths=PackedStringArray("roundTimer")]
-script = ExtResource("1_6seei")
+[node name="Node3D" type="Node3D" unique_id=1450625905 node_paths=PackedStringArray("roundTimer", "purpleGoal", "yellowGoal", "mapObjs", "oobArea", "ball", "botSpawner")]
+script = ExtResource("1_7jtoi")
 title = "Testing Map"
 author = "ilo Kiso"
 roundTimer = NodePath("Timer")
+purpleGoal = NodePath("map objects/goalpurple")
+yellowGoal = NodePath("map objects/goalyellow")
+mapObjs = NodePath("map objects")
+oobArea = NodePath("oob detector")
+ball = NodePath("ball")
+ballResetPoint = Vector3(0, 3, 0)
+botSpawner = NodePath("clanker spawner")
 metadata/_custom_type_script = "uid://b5se86qylwv8l"
 
 [node name="ball" parent="." unique_id=95649449 instance=ExtResource("1_julm7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2555461, 0)
 mass = 0.2
 
-[node name="ball reset point" type="Node3D" parent="." unique_id=60646456]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-
-[node name="PlayerManager" type="Node3D" parent="." unique_id=7285542 node_paths=PackedStringArray("player")]
-script = ExtResource("3_u2l6s")
-player = NodePath("player")
-metadata/_custom_type_script = "uid://bkix48au43eva"
-
-[node name="player" parent="PlayerManager" unique_id=1311159354 instance=ExtResource("2_ys0t5")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8, 2.5, 0)
-
 [node name="clanker spawner" parent="." unique_id=1932460306 instance=ExtResource("3_8vdae")]
-spawnpointsPurple = Array[Vector4]([Vector4(-12, 2.5, -5, -90), Vector4(-11, 2.5, -2.5, -90), Vector4(-10, 2.5, 0, -90), Vector4(-11, 2.5, 2.5, -90), Vector4(-12, 2.5, 5, -90)])
-spawnpointsYellow = Array[Vector4]([Vector4(12, 2.5, -5, 90), Vector4(11, 2.5, -2.5, 90), Vector4(10, 2.5, 0, 90), Vector4(11, 2.5, 2.5, 90), Vector4(12, 2.5, 5, 90)])
 
-[node name="floor" type="StaticBody3D" parent="." unique_id=914429687]
+[node name="map objects" type="Node3D" parent="." unique_id=1804373752]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="floor" unique_id=622055779]
+[node name="floor" type="StaticBody3D" parent="map objects" unique_id=914429687]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="map objects/floor" unique_id=622055779]
 shape = SubResource("BoxShape3D_ys0t5")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="floor" unique_id=639881212]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="map objects/floor" unique_id=639881212]
 mesh = SubResource("BoxMesh_8vdae")
 
-[node name="30mwall" type="StaticBody3D" parent="." unique_id=390586525]
+[node name="30mwall" type="StaticBody3D" parent="map objects" unique_id=390586525]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5, 1.75, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="30mwall" unique_id=421409620]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="map objects/30mwall" unique_id=421409620]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 shape = SubResource("BoxShape3D_6seei")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="30mwall" unique_id=1624222855]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="map objects/30mwall" unique_id=1624222855]
 mesh = SubResource("BoxMesh_dbxb2")
 
-[node name="30mwall2" type="StaticBody3D" parent="." unique_id=141081860]
+[node name="30mwall2" type="StaticBody3D" parent="map objects" unique_id=141081860]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 1.75, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="30mwall2" unique_id=63880777]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="map objects/30mwall2" unique_id=63880777]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 shape = SubResource("BoxShape3D_6seei")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="30mwall2" unique_id=1522498949]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="map objects/30mwall2" unique_id=1522498949]
 mesh = SubResource("BoxMesh_dbxb2")
 
-[node name="50mwall" type="StaticBody3D" parent="." unique_id=592034109]
+[node name="50mwall" type="StaticBody3D" parent="map objects" unique_id=592034109]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, -15.5)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="50mwall" unique_id=262768586]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="map objects/50mwall" unique_id=262768586]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 shape = SubResource("BoxShape3D_ov2oi")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="50mwall" unique_id=88015916]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="map objects/50mwall" unique_id=88015916]
 mesh = SubResource("BoxMesh_x6wp4")
 
-[node name="50mwall2" type="StaticBody3D" parent="." unique_id=494809304]
+[node name="50mwall2" type="StaticBody3D" parent="map objects" unique_id=494809304]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 15.5)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="50mwall2" unique_id=121890118]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="map objects/50mwall2" unique_id=121890118]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 shape = SubResource("BoxShape3D_ov2oi")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="50mwall2" unique_id=1619570201]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="map objects/50mwall2" unique_id=1619570201]
 mesh = SubResource("BoxMesh_x6wp4")
+
+[node name="goalpurple" parent="map objects" unique_id=9225472 instance=ExtResource("5_7jtoi")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -18.5, 0, 0)
+
+[node name="goalyellow" parent="map objects" unique_id=146667370 instance=ExtResource("5_7jtoi")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18.5, 0, 0)
+isYellow = true
 
 [node name="oob detector" type="Area3D" parent="." unique_id=1171823272]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.1925025, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="oob detector" unique_id=742437213]
 shape = SubResource("BoxShape3D_8vdae")
-
-[node name="goalpurple" parent="." unique_id=9225472 instance=ExtResource("5_7jtoi")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -18.5, 0, 0)
-
-[node name="goalyellow" parent="." unique_id=146667370 instance=ExtResource("5_7jtoi")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18.5, 0, 0)
-isYellow = true
 
 [node name="Timer" type="Timer" parent="." unique_id=1400241490]
 wait_time = 600.0

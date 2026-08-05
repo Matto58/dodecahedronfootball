@@ -80,9 +80,10 @@ layout_mode = 2
 layout_mode = 2
 text = "Play"
 
-[node name="Button4" type="Button" parent="HBoxContainer/VBoxContainer/Container" unique_id=1932089327]
+[node name="Button4" type="Button" parent="HBoxContainer/VBoxContainer/Container" unique_id=2097824776]
 layout_mode = 2
-text = "Sandbox"
+disabled = true
+text = "Sandbox (WIP)"
 
 [node name="Button2" type="Button" parent="HBoxContainer/VBoxContainer/Container" unique_id=1241194629]
 layout_mode = 2
@@ -104,11 +105,8 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer3" unique_id=690735395]
+visible = false
 layout_mode = 2
-
-[node name="Label3" type="Label" parent="HBoxContainer/PanelContainer3/VBoxContainer" unique_id=1621800090]
-layout_mode = 2
-text = "NOTE: Playing with multiple people is not implemented yet!"
 
 [node name="Label" type="Label" parent="HBoxContainer/PanelContainer3/VBoxContainer" unique_id=90851218]
 layout_mode = 2
@@ -182,6 +180,63 @@ layout_mode = 2
 text = "join server"
 label_settings = SubResource("LabelSettings_ekxnf")
 
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/PanelContainer3" unique_id=1441148308]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer3/VBoxContainer2" unique_id=757196643]
+layout_mode = 2
+text = "join server"
+label_settings = SubResource("LabelSettings_ekxnf")
+
+[node name="HFlowContainer3" type="HFlowContainer" parent="HBoxContainer/PanelContainer3/VBoxContainer2" unique_id=1797179533]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer3/VBoxContainer2/HFlowContainer3" unique_id=210850831]
+layout_mode = 2
+text = "Preferred team:"
+
+[node name="prefrandteam" type="CheckBox" parent="HBoxContainer/PanelContainer3/VBoxContainer2/HFlowContainer3" unique_id=91453665]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+button_pressed = true
+button_group = SubResource("ButtonGroup_bqqt6")
+text = "Random"
+
+[node name="prefpteam" type="CheckBox" parent="HBoxContainer/PanelContainer3/VBoxContainer2/HFlowContainer3" unique_id=1711547884]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+button_group = SubResource("ButtonGroup_bqqt6")
+text = "Purple"
+
+[node name="prefyteam" type="CheckBox" parent="HBoxContainer/PanelContainer3/VBoxContainer2/HFlowContainer3" unique_id=117105317]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+button_group = SubResource("ButtonGroup_bqqt6")
+text = "Yellow"
+
+[node name="Label2" type="Label" parent="HBoxContainer/PanelContainer3/VBoxContainer2" unique_id=2008841176]
+visible = false
+layout_mode = 2
+text = "join server"
+label_settings = SubResource("LabelSettings_ekxnf")
+
+[node name="ipinput" type="LineEdit" parent="HBoxContainer/PanelContainer3/VBoxContainer2" unique_id=1510166226]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "IP address"
+
+[node name="portinput" type="LineEdit" parent="HBoxContainer/PanelContainer3/VBoxContainer2" unique_id=1859121110]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Port"
+
+[node name="connectbtn" type="Button" parent="HBoxContainer/PanelContainer3/VBoxContainer2" unique_id=2089568672]
+layout_mode = 2
+text = "Connect"
+
 [node name="PanelContainer" type="PanelContainer" parent="HBoxContainer" unique_id=657258046]
 layout_mode = 2
 
@@ -241,25 +296,37 @@ metadata/_custom_type_script = "uid://lllepfb0mbng"
 
 [node name="loadingscreen" type="ColorRect" parent="." unique_id=614990567]
 visible = false
-layout_mode = 0
-offset_right = 592.0
-offset_bottom = 257.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0, 0, 0, 0.49803922)
 
 [node name="Label2" type="Label" parent="loadingscreen" unique_id=1673850373]
-layout_mode = 0
-offset_right = 206.0
-offset_bottom = 72.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -36.0
+offset_right = 103.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "loading"
 label_settings = SubResource("LabelSettings_l6cm7")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Container/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/Container/Button4" to="." method="_on_button_4_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Container/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Container/Button3" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="HBoxContainer/PanelContainer3/VBoxContainer/selmapopenbtn" to="." method="_on_selmapopenbtn_pressed"]
+[connection signal="pressed" from="HBoxContainer/PanelContainer3/VBoxContainer2/connectbtn" to="." method="_on_connectbtn_pressed"]
 [connection signal="item_activated" from="HBoxContainer/PanelContainer/mapselect/maplist" to="." method="_on_maplist_item_activated"]
 [connection signal="item_selected" from="HBoxContainer/PanelContainer/mapselect/maplist" to="." method="_on_maplist_item_selected"]
 [connection signal="pressed" from="HBoxContainer/PanelContainer/mapselect/HFlowContainer/playmapsandbox" to="." method="_on_playmapsandbox_pressed"]

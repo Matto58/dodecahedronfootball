@@ -13,6 +13,8 @@ static func loadCustomMap(mapPath: String) -> PackedScene:
 	return map
 
 static func validateMap(map: Map) -> bool:
+	return false
+	# todo: remake after making networking stuff work
 	if map == null:
 		print("tried to validate map, but is null")
 		return false

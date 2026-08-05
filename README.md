@@ -22,4 +22,4 @@ NOTE: LICENSE.txt applies only to the software and code, the following songs hav
 * Local Detective by kala Kiso (download [here](https://matto58.bandcamp.com/track/local-detective)) - under the CC BY-SA 4.0 license
 * Mechanopolis by kala Kiso (download [here](https://matto58.bandcamp.com/track/mechanopolis)) - under the CC BY-SA 4.0 license
 * The Unparalleled Silliness of Petting a Cat (Mgaow!) by kala Kiso (download [here](https://matto58.bandcamp.com/track/the-unparalleled-silliness-of-petting-a-cat-mgaow)) - under the CC BY-SA 4.0 license
-* Furnace For The Wicked by kala Kiso (unreleased) - under the CC BY-SA 4.0 license
+* Furnace For The Wicked by kala Kiso (download [here](https://matto58.bandcamp.com/track/furnace-for-the-wicked)) - under the CC BY-SA 4.0 license

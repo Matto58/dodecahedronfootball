@@ -2,15 +2,14 @@ extends Node3D
 
 class_name PlayerManager
 
-@export var player: Player
-var mapInfo: Map # todo: make a MapInfo resource class that contains server-generated info about the map that the player needs to know
+var player: LocalPlayer
+var mapInfo: MapInfo
 var playerCam: Camera3D
 var hud: Control
 var consoleWin: Window
 
-# local copies (these will be moved into MapInfo)
-var scorePurple: int = 0
-var scoreYellow: int = 0
+const PURPLE_MATERIAL = preload("res://mats/goalourple.tres")
+const YELLOW_MATERIAL = preload("res://mats/goalyello.tres")
 
 static func timeToStr(seconds: float):
 	var minutes = int(seconds/60)
@@ -18,33 +17,53 @@ static func timeToStr(seconds: float):
 	return str(minutes) + ":" + str(secondsComponent).pad_zeros(2)
 
 func updateScores():
-	hud.get_node("RichTextLabel2").text = "[b][color=\"#7f00ff\"]%d[/color][/b] : [b][color=\"#ff0\"]%d[/color][/b]" % [scorePurple, scoreYellow]
+	hud.get_node("RichTextLabel2").text = "[b][color=\"#7f00ff\"]%d[/color][/b] : [b][color=\"#ff0\"]%d[/color][/b]" % [mapInfo.currentPScore, mapInfo.currentYScore]
 
-func onGoal(yello: bool):
-	if yello: scorePurple += 1
-	else: scoreYellow += 1
-	hud.get_node("goallabel").label_settings.font_color = Color(1, 1, 0) if yello else Color(0.5, 0, 1)
-	hud.get_node("AnimationPlayer").play("goal")
-	updateScores()
+func initPlayerNickInHUD():
+	hud.get_node("RichTextLabel").append_text("[color=\"#999\"]Playing as[/color] [b][color=\"#%s\"]%s[/color][/b]" % ["ff0" if player.i.isYellow else "7f00ff", player.i.nickname])
 
-func _ready() -> void:
-	playerCam = player.get_node("Camera3D")
-	hud = playerCam.get_node("HUD")
-	consoleWin = player.get_node("Console")
+static func createNametag(p: Node3D):
+	var tag = Label3D.new()
+	if p.has_node("nametag"):
+		tag = p.get_node("nametag")
+	else:
+		p.add_child(tag)
+	tag.position = Vector3(0, 1.25, 0)
+	tag.name = "nametag"
+	tag.text = p.i.nickname
+	tag.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	tag.font_size = 64
+
+func giveCamera():
+	playerCam = Camera3D.new()
+	player.add_child(playerCam)
+	playerCam.position = Vector3(0.0, 0.75, 0.0)
+	playerCam.rotation_degrees = Vector3(-30.0, 0.0, 0.0)
+	hud = preload("res://scenes/hud.tscn").instantiate()
+	playerCam.add_child(hud)
+	var pauseMenu = preload("res://scenes/pause_menu.tscn").instantiate()
+	playerCam.add_child(pauseMenu)
+	pauseMenu.hide()
+
+func giveConsole():
+	consoleWin = preload("res://scenes/console.tscn").instantiate()
+
+func _init() -> void:
+	#consoleWin = player.get_node("Console")
 	player.nickname = Settoing.activeInstance.nickname
-	player.initPlayerNickInHUD()
-	player.createNametag()
+	initPlayerNickInHUD()
 	updateScores()
+	giveCamera()
+	#giveConsole()
 
 func initMapStuff():
-	consoleWin.map = mapInfo
+	#consoleWin.map = mapInfo
 	hud.get_node("mapprops/author").text = "by " + mapInfo.author
 	hud.get_node("mapprops/name").text = mapInfo.title
 
-	# todo: make this not necessary, as the server will tell the client when a goal happens
-	mapInfo.get_node("goalpurple").onGoalScore.connect(onGoal)
-	mapInfo.get_node("goalyellow").onGoalScore.connect(onGoal)
-	player.setBallPos.connect(mapInfo.playerSetBallPos) # todo: also make this not necessary, because it'll just be a flag the client tells the server
+	#mapInfo.get_node("goalpurple").onGoalScore.connect(onGoal)
+	#mapInfo.get_node("goalyellow").onGoalScore.connect(onGoal)
+	#player.setBallPos.connect(mapInfo.playerSetBallPos) # todo: also make this not necessary, because it'll just be a flag the client tells the server
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -54,10 +73,10 @@ func _process(delta: float) -> void:
 		consoleWin.visible = player.paused
 
 func _physics_process(delta: float) -> void:
-	player.sprinting = Input.is_action_pressed("sprint")
-	player.input_dir = Input.get_axis("backward", "forward")
-	player.yumping = Input.is_action_just_pressed("yump")
-	player.lookAroundDir = Input.get_axis("leftalt", "rightalt") if Settoing.activeInstance.useAltPan else Input.get_axis("left", "right")
-	player.sensitivity = Settoing.activeInstance.rotMod
-	player.holdingBall = Input.is_action_pressed("holding_ball")
+	player.inp.sprinting = Input.is_action_pressed("sprint")
+	player.inp.input_dir = Input.get_axis("backward", "forward")
+	player.inp.yumping = Input.is_action_just_pressed("yump")
+	player.inp.lookAroundDir = Input.get_axis("leftalt", "rightalt") if Settoing.activeInstance.useAltPan else Input.get_axis("left", "right")
+	player.inp.sensitivity = Settoing.activeInstance.rotMod
+	player.inp.holdingBall = Input.is_action_pressed("holding_ball")
 	playerCam.rotation.y = PI if Input.is_action_pressed("lookin_back") else 0.0
