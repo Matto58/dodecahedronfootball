@@ -1,5 +1,7 @@
 extends Logger
 
+class_name ConsoleLogger
+
 var uiLog: RichTextLabel
 func _log_error(function: String, file: String, line: int, code: String, rationale: String, editor_notify: bool, error_type: int, script_backtraces: Array[ScriptBacktrace]) -> void:
 	if uiLog == null: return
