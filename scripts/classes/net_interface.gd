@@ -4,12 +4,12 @@ class_name NetInterface
 
 # NAMING SCHEME ON FUNCTIONS:
 # c* - called by the client but executed on the server
-# s* - called by the server but executed on the client
+# s* - called by the server but executed on the client - by extension, sCB* - callbacks of equivalent c* functions
 # everything else - called and executed on the server
 
 var peer: ENetMultiplayerPeer
-var map: Map # null if client (hopefully)
-var pMgr: PlayerManager # null if server (hopefully)
+var map # null if client (hopefully)
+var pMgr # null if server (hopefully)
 
 const DEFAULT_SERVER_PORT = 6200
 
@@ -57,37 +57,33 @@ func shutDown():
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 
 @rpc("any_peer", "call_remote")
-func cPlayerJoin(p: PlayerInfo) -> PlayerInfo:
+func cPlayerJoin(p: PlayerInfo):
 	var id: int = multiplayer.get_remote_sender_id()
 	var teamMembers = map.countTeamMembers()
 	p.nickname = getUniqueNick(p.nickname)
 	# respect preference if team players are equal, otherwise join team with less players
 	p.isYellow = p.isYellow if teamMembers.x == teamMembers.y else teamMembers.x > teamMembers.y
 	p.netID = id
-	p = map.handleJoin(p)
-	return p
+	map.handleJoin(p)
 @rpc("any_peer", "call_remote")
 func cPlayerLeave():
 	var id: int = multiplayer.get_remote_sender_id()
 	disconnectPlayer(id)
 	#printerr("cPlayerLeave: wtf player %d does not exist????? oh well ignoring" % id)
 @rpc("any_peer", "call_remote")
-func cPlayerCanHoldBall() -> bool:
-	return false
-@rpc("any_peer", "call_remote")
-func cPlayerGetInfo() -> PlayerInfo:
+func cPlayerGetInfo():
 	var id: int = multiplayer.get_remote_sender_id()
-	for p in map.players.values():
-		if p.netID == id:
-			return p.i
-	return PlayerInfo.new()
+	sCBPlayerGetInfo.rpc_id(id, map.players[id].i)
 @rpc("any_peer", "call_remote")
 func cPlayerApplyInput(inputs: PlayerInputs):
 	var id: int = multiplayer.get_remote_sender_id()
 	map.players[id].inp = inputs
 @rpc("any_peer", "call_remote")
-func cGetMapInfo() -> MapInfo:
-	return map.generateInfo()
+func cGetMapInfo():
+	sCBGetMapInfo.rpc_id(multiplayer.get_remote_sender_id(), map.generateInfo())
+@rpc("any_peer", "call_remote")
+func cGetServerSummary() -> MapSummary:
+	return map.generateSummary()
 @rpc("any_peer", "call_remote")
 func cTryConsoleCmd(cmd: String) -> bool:
 	if multiplayer.is_server():
@@ -95,11 +91,28 @@ func cTryConsoleCmd(cmd: String) -> bool:
 		return true
 	return false
 
-@rpc("any_peer", "call_local")
+@rpc("authority", "call_local")
 func sOnGoal(goalIsYellow: bool):
-	if pMgr == null: return
 	if goalIsYellow: pMgr.mapInfo.currentPScore += 1
 	else: pMgr.mapInfo.currentYScore += 1
 	pMgr.hud.get_node("goallabel").label_settings.font_color = Color(0.5, 0, 1) if goalIsYellow else Color(1, 1, 0)
 	pMgr.hud.get_node("AnimationPlayer").play("goal")
 	pMgr.player.updateScores()
+@rpc("authority", "call_local")
+func sGiveAllPlayerInfo(i: Dictionary[int, PlayerInfo]):
+	for id in i.keys():
+		if not pMgr.otherPlayers.has(id) and pMgr.player.i.netID != id:
+			pMgr.handleNewPlayer(i[id])
+@rpc("authority", "call_local")
+func sApplyPlayerLeave(id: int):
+	pMgr.handlePlayerLeave(id)
+
+@rpc("authority", "call_local")
+func sCBPlayerGetInfo(i: PlayerInfo):
+	pMgr.player.i = i
+@rpc("authority", "call_local")
+func sCBGetMapInfo(i: MapInfo):
+	pMgr.mapInfo = i
+@rpc("authority", "call_local")
+func sCBGetMapSumm(i: MapSummary):
+	pMgr.mapSumm = i

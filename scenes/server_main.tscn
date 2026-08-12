@@ -16,7 +16,10 @@ script = ExtResource("1_rcx6v")
 
 [node name="FileDialog" type="FileDialog" parent="." unique_id=111823314]
 title = "Open a File"
+position = Vector2i(32, 64)
 file_mode = 0
+display_mode = 1
+access = 2
 filters = PackedStringArray("*.tscn", "*.scn")
 
 [connection signal="canceled" from="FileDialog" to="." method="_on_file_dialog_canceled"]

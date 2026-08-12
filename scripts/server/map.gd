@@ -7,8 +7,8 @@ class_name Map
 @export var author: String
 @export var maxPlayersPerTeam: int
 @export var roundTimer: Timer
-@export var purpleGoal: Node3D
-@export var yellowGoal: Node3D
+@export var purpleGoal: Goal
+@export var yellowGoal: Goal
 @export var mapObjs: Node3D
 @export var oobArea: Area3D
 @export var ball: RigidBody3D
@@ -36,7 +36,6 @@ func playerSetBallPos(pos: Vector3, rot: Vector3):
 
 func generateInfo() -> MapInfo:
 	var i = MapInfo.new()
-	i.serverVersion = DHMain.GAME_VER
 	i.name = title
 	i.author = author
 	i.roundTimer = roundTimer
@@ -44,6 +43,15 @@ func generateInfo() -> MapInfo:
 	i.players = players.values().map(func(p): return p.i)
 	i.currentPScore = scorePurple
 	i.currentYScore = scoreYellow
+	return i
+
+func generateSummary() -> MapSummary:
+	var i = MapSummary.new()
+	i.serverVersion = DHMain.GAME_VER
+	i.name = title
+	i.author = author
+	i.players = players.size()
+	i.playerCapacity = maxPlayersPerTeam*2
 	return i
 
 func handleJoin(player: PlayerInfo) -> PlayerInfo:
@@ -67,6 +75,7 @@ func handleLeave(playerNetID: int):
 	remove_child(p)
 	players.erase(playerNetID)
 	p.queue_free()
+	net.sApplyPlayerLeave.rpc(playerNetID)
 
 func countTeamMembers() -> Vector2i:
 	var purples = 0
@@ -99,6 +108,8 @@ func _ready() -> void:
 		else: print("can't handle ", body, " going out of bounds")
 		#print("fuck")
 	)
+	purpleGoal.onGoalScore.connect(func(): net.sOnGoal.rpc(false))
+	yellowGoal.onGoalScore.connect(func(): net.sOnGoal.rpc(true))
 
 	#print("spawning %d purple and %d yellow bots" % [purpleBots, yellowBots])
 	#spawnedP = $"clanker spawner".spawn(purpleBots, false)

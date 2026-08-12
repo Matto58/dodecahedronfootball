@@ -3,9 +3,12 @@ extends Node3D
 class_name PlayerManager
 
 var player: LocalPlayer
+var otherPlayers: Dictionary[int, LocalPlayer]
 var mapInfo: MapInfo
+var mapSumm: MapSummary
 var playerCam: Camera3D
 var hud: Control
+var pauseMenu: Control
 var consoleWin: Window
 
 const PURPLE_MATERIAL = preload("res://mats/goalourple.tres")
@@ -34,6 +37,18 @@ static func createNametag(p: Node3D):
 	tag.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	tag.font_size = 64
 
+func handleNewPlayer(p: PlayerInfo):
+	var playerObj = LocalPlayer.new()
+	playerObj.i = p
+	add_child(playerObj)
+	otherPlayers[p.netID] = playerObj
+
+func handlePlayerLeave(id: int):
+	var p = otherPlayers[id]
+	remove_child(p)
+	otherPlayers.erase(id)
+	p.queue_free()
+
 func giveCamera():
 	playerCam = Camera3D.new()
 	player.add_child(playerCam)
@@ -41,20 +56,21 @@ func giveCamera():
 	playerCam.rotation_degrees = Vector3(-30.0, 0.0, 0.0)
 	hud = preload("res://scenes/hud.tscn").instantiate()
 	playerCam.add_child(hud)
-	var pauseMenu = preload("res://scenes/pause_menu.tscn").instantiate()
+	pauseMenu = preload("res://scenes/pause_menu.tscn").instantiate()
 	playerCam.add_child(pauseMenu)
 	pauseMenu.hide()
 
 func giveConsole():
 	consoleWin = preload("res://scenes/console.tscn").instantiate()
+	player.add_child(consoleWin)
 
-func _init() -> void:
+func _ready() -> void:
 	#consoleWin = player.get_node("Console")
-	player.nickname = Settoing.activeInstance.nickname
-	initPlayerNickInHUD()
-	updateScores()
+	player.i.nickname = Settoing.activeInstance.nickname
 	giveCamera()
 	#giveConsole()
+	initPlayerNickInHUD()
+	updateScores()
 
 func initMapStuff():
 	#consoleWin.map = mapInfo
@@ -80,3 +96,5 @@ func _physics_process(delta: float) -> void:
 	player.inp.sensitivity = Settoing.activeInstance.rotMod
 	player.inp.holdingBall = Input.is_action_pressed("holding_ball")
 	playerCam.rotation.y = PI if Input.is_action_pressed("lookin_back") else 0.0
+	player.global_position = player.i.position
+	player.global_rotation = player.i.rotation
