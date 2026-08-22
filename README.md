@@ -23,3 +23,4 @@ NOTE: LICENSE.txt applies only to the software and code, the following songs hav
 * Mechanopolis by kala Kiso (download [here](https://matto58.bandcamp.com/track/mechanopolis)) - under the CC BY-SA 4.0 license
 * The Unparalleled Silliness of Petting a Cat (Mgaow!) by kala Kiso (download [here](https://matto58.bandcamp.com/track/the-unparalleled-silliness-of-petting-a-cat-mgaow)) - under the CC BY-SA 4.0 license
 * Furnace For The Wicked by kala Kiso (download [here](https://matto58.bandcamp.com/track/furnace-for-the-wicked)) - under the CC BY-SA 4.0 license
+* Inner Cell by King Gizzard & The Lizard Wizard (download [here](https://bootleggizzard.bandcamp.com/track/inner-cell)) - under the CC0 license

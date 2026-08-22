@@ -10,7 +10,8 @@ static var mainMenuTracks: Array[Soundtrack] = [
 	Soundtrack.create("Local Detective", "kala Kiso", "https://matto58.bandcamp.com/track/local-detective", "https://matto58.bandcamp.com", "CC BY-SA 4.0", "res://music/main_menu/detective.mp3"),
 	Soundtrack.create("Mechanopolis", "kala Kiso", "https://matto58.bandcamp.com/track/mechanopolis", "https://matto58.bandcamp.com", "CC BY-SA 4.0", "res://music/main_menu/mechanopolis.mp3"),
 	Soundtrack.create("The Unparalleled Silliness of Petting a Cat (Mgaow!)", "kala Kiso", "https://matto58.bandcamp.com/track/the-unparalleled-silliness-of-petting-a-cat-mgaow", "https://matto58.bandcamp.com", "CC BY-SA 4.0", "res://music/main_menu/mgaow.mp3"),
-	Soundtrack.create("Furnace For The Wicked", "kala Kiso", "https://matto58.bandcamp.com/track/furnace-for-the-wicked", "https://matto58.bandcamp.com", "CC BY-SA 4.0", "res://music/main_menu/furnace.mp3")
+	Soundtrack.create("Furnace For The Wicked", "kala Kiso", "https://matto58.bandcamp.com/track/furnace-for-the-wicked", "https://matto58.bandcamp.com", "CC BY-SA 4.0", "res://music/main_menu/furnace.mp3"),
+	Soundtrack.create("Inner Cell", "King Gizzard & The Lizard Wizard", "https://bootleggizzard.bandcamp.com/track/inner-cell", "https://kinggizzardandthelizardwizard.com/bootlegger", "CC0", "res://music/main_menu/innercell.mp3"),
 ]
 var currentlyPlaying: Soundtrack
 var currentlyPlayingInx: int
