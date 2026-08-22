@@ -20,6 +20,7 @@ static func timeToStr(seconds: float):
 	return str(minutes) + ":" + str(secondsComponent).pad_zeros(2)
 
 func updateScores():
+	if mapInfo == null: return
 	hud.get_node("RichTextLabel2").text = "[b][color=\"#7f00ff\"]%d[/color][/b] : [b][color=\"#ff0\"]%d[/color][/b]" % [mapInfo.currentPScore, mapInfo.currentYScore]
 
 func initPlayerNickInHUD():
@@ -68,7 +69,7 @@ func _ready() -> void:
 	#consoleWin = player.get_node("Console")
 	player.i.nickname = Settoing.activeInstance.nickname
 	giveCamera()
-	#giveConsole()
+	giveConsole()
 	initPlayerNickInHUD()
 	updateScores()
 
@@ -83,10 +84,11 @@ func initMapStuff():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	hud.get_node("timerlabel").text = timeToStr(mapInfo.roundTimer.time_left)
 	if Input.is_action_just_pressed("pause"):
 		player.paused = not player.paused
 		consoleWin.visible = player.paused
+	if mapInfo == null: return
+	hud.get_node("timerlabel").text = timeToStr(mapInfo.roundTimer.time_left)
 
 func _physics_process(delta: float) -> void:
 	player.inp.sprinting = Input.is_action_pressed("sprint")

@@ -7,7 +7,7 @@ func _log_error(function: String, file: String, line: int, code: String, rationa
 	if uiLog == null: return
 	uiLog.push_paragraph(HORIZONTAL_ALIGNMENT_LEFT)
 	uiLog.push_color(Color.YELLOW if error_type == ERROR_TYPE_WARNING else Color.RED)
-	uiLog.add_text("[%s] %s: %s (%s at %s:%d)" % [Time.get_time_string_from_system(), "WARN" if error_type == ERROR_TYPE_WARNING else "ERROR", rationale, code, file, code])
+	uiLog.add_text("[%s] %s: %s (at %s:%s)" % [Time.get_time_string_from_system(), "WARN" if error_type == ERROR_TYPE_WARNING else "ERROR", rationale, file, code])
 	uiLog.pop()
 	uiLog.pop()
 
