@@ -57,6 +57,7 @@ func spawn(count: int, onYellowSide: bool, nickname: String = "", easyDiff: bool
 		print("spawned %s bot '%s' at %s" % ["yellow" if bot.isYellow else "purple", bot.nickname, bot.global_position])
 	return spawnedBots
 
+## creates a bot with a random nickname on the specified team and with the specified difficulty
 static func createBot(isYellow: bool, easyDiff: bool) -> Clanker:
 	var bot = Clanker.new()
 	bot.isYellow = isYellow

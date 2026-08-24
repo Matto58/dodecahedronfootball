@@ -77,6 +77,7 @@ func handleLeave(playerNetID: int):
 	p.queue_free()
 	net.sApplyPlayerLeave.rpc(playerNetID)
 
+## x: purple, y: yellow
 func countTeamMembers() -> Vector2i:
 	var purples = 0
 	var yellows = 0

@@ -4,10 +4,17 @@
 
 class_name MapInfo
 
+## map name. displayed in the ui
 var name: String
+## map author. can be real name, nickname or github username
 var author: String
+## map timer
 var roundTimer: Timer
+## node containing all the objects in the map
 var mapObjs: Node3D
+## list of players, with each player described with `PlayerInfo`
 var players: Array[PlayerInfo]
+## the current score for the purple team
 var currentPScore: int
+## the current score for the yellow team
 var currentYScore: int

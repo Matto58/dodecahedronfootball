@@ -8,6 +8,8 @@ var canScoreBall = true
 @export var purpleMaterial: StandardMaterial3D
 @export var yellowMaterial: StandardMaterial3D
 
+## fired when a goal is scored.
+## has one parameter: `isYellow` - true if the goal was scored into the yellow goal (so this goal's team)
 signal onGoalScore
 
 func _ready() -> void:

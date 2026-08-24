@@ -12,6 +12,7 @@ func _ready() -> void:
 	else:
 		get_tree().change_scene_to_file("res://scenes/server_main.tscn")
 
+## creates a popup with the specified text and adds it to the specified parent
 static func popup(parent: Node, title: String, text: String, onClose: Callable = func(): pass) -> AcceptDialog:
 	var p = AcceptDialog.new()
 	p.title = title
@@ -21,6 +22,7 @@ static func popup(parent: Node, title: String, text: String, onClose: Callable =
 	parent.add_child(p)
 	return p
 
+## creates a popup with the specified yes/no options and adds it to the specified parent
 static func ask(parent: Node, title: String, text: String, yesStr: String, noStr: String, onYes: Callable, onNo: Callable) -> ConfirmationDialog:
 	var p = ConfirmationDialog.new()
 	p.title = title

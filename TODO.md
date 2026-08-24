@@ -11,7 +11,7 @@ Goals for Demo 2:
 Goals for Demo 3:
 - [ ] Debug menu
 	- [x] Console
-- [ ] Make Grounds a real map
+- [ ] Make Grounds a real map (0.3.5)
 - [ ] Bots to play against
 	- [x] Easy difficulty
 	- [ ] Hard difficulty
@@ -19,3 +19,12 @@ Goals for Demo 3:
 	- [x] Color players appropriately
 	- [x] Name tags + name customization in settings
 - [x] Support for loading maps from a file
+- [ ] Assigning admin to players (0.3.5)
+- [ ] Change the default skybox (0.3.4)
+
+Goals for Demo 4:
+- [ ] More teams support (but not necessarily implementation)
+- [ ] More controls options (setting custom keybinds etc)
+- [ ] Reimplement sandbox
+- [ ] Support for a server in the client
+- [ ] Server selection menu

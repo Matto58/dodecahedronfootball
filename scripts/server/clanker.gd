@@ -22,11 +22,12 @@ func _ready() -> void:
 	getMovement.connect(inputSim)
 	$MeshInstance3D.mesh.surface_set_material(0, YELLOW_MATERIAL if i.isYellow else PURPLE_MATERIAL)
 
+## changes the current ai target to the specified one
 func newTarget(t: AITargets):
 	print("%s is changing targets from %s to %s" % [i.nickname, AITargets.keys()[currentTarget], AITargets.keys()[t]])
 	currentTarget = t
 
-# returns distance towards target
+## returns distance towards the specified target in 2d space, rotated by the bot's rotation, and rotates the bot towards the target
 func moveSelfTowards(target: Node3D) -> Vector2:
 	var distanceToTarget2D = calcDist2D(target)
 	if distanceToTarget2D.y > 0:
@@ -38,15 +39,19 @@ func moveSelfTowards(target: Node3D) -> Vector2:
 		inp.lookAroundDir = 1.0
 	return distanceToTarget2D
 
-func calcDist3D(target: Node3D):
+## returns the difference of positions of the bot and the target
+func calcDist3D(target: Node3D) -> Vector3:
 	return global_position - target.global_position
 
-func calcDist2DFrom3D(dist: Vector3):
+## takes the x/z vector of the specified position difference, rotates it by the bot's rotation and returns that rotated value
+func calcDist2DFrom3D(dist: Vector3) -> Vector2:
 	return Vector2(dist.x, dist.z).rotated(global_rotation.y)
 
-func calcDist2D(target: Node3D):
+## takes the x/z vector of the difference of positions of the bot and the target, rotates it by the bot's rotation and returns that rotated value
+func calcDist2D(target: Node3D) -> Vector2:
 	return calcDist2DFrom3D(calcDist3D(target))
 
+## input simulation
 func inputSim(delta: float) -> void:
 	if inp.paused:
 		inp.input_dir = 0.0
