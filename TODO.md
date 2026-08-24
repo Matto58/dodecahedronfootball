@@ -23,6 +23,7 @@ Goals for Demo 3:
 - [ ] Change the default skybox (0.3.4)
 
 Goals for Demo 4:
+- [ ] Discord rich presence
 - [ ] More teams support (but not necessarily implementation)
 - [ ] More controls options (setting custom keybinds etc)
 - [ ] Reimplement sandbox
